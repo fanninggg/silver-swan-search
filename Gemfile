@@ -19,6 +19,7 @@ gem 'rest-client'
 gem 'nationality', '~> 1.0.5', git: 'https://github.com/JomaMinoza/nationality'
 gem 'language_list'
 gem 'country_select', '~> 4.0'
+gem 'countries', require: 'countries/global'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
