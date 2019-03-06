@@ -1,7 +1,22 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+User.destroy_all
+
+50.times do
+  user = User.new(
+    last_name: Faker::Name.last_name,
+    gender: %w[Male Female].sample,
+    phone_number: Faker::PhoneNumber.phone_number_with_country_code,
+    dob: Faker::Date.birthday(18, 50),
+    location: Faker::Address.city,
+    nationality: Nationality::NATIONALITY.sample,
+    experience: %w[1 2 3 4 5].sample,
+    bio: Faker::Lorem.paragraph(3, true, 3),
+    password: 'password'
+  )
+  user.first_name = Faker::Name.send("#{user.gender.downcase}_first_name")
+  user.email = Faker::Internet.safe_email(user.full_name)
+  user.save!
+  LanguageList::COMMON_LANGUAGES.map(&:name).map { |l| l.match(/Greek/) ? 'Greek' : l }.map { |l| l.match(/Tonga/) ? 'Tonga' : l}.sample(rand(1..3)).each { |l| FluentLanguage.create(language: l, user: user) }
+  LanguageList::COMMON_LANGUAGES.map(&:name).map { |l| l.match(/Greek/) ? 'Greek' : l }.map { |l| l.match(/Tonga/) ? 'Tonga' : l}.sample(rand(1..3)).each { |l| ConversationalLanguage.create(language: l, user: user) }
+end
