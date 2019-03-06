@@ -8,7 +8,7 @@ User.destroy_all
     gender: %w[Male Female].sample,
     phone_number: Faker::PhoneNumber.phone_number_with_country_code,
     dob: Faker::Date.birthday(18, 50),
-    location: Country.all_translated.sample,
+    location: Country.all.map(&:alpha2).sample,
     nationality: Nationality::NATIONALITY.sample,
     experience: %w[1 2 3 4 5].sample,
     bio: Faker::Lorem.paragraph(3, true, 3),

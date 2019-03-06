@@ -1,0 +1,17 @@
+<h1>CANDIDATE INDEX</h1>
+
+<%= simple_form_for :search, url: admin_candidates_path, method: :get do |f| %>
+  <%= f.input :gender, collection: %w[Male Female Other], selected: params[:search].present? ? params[:search][:gender] : '', include_blank: true, label: 'Gender', required: false %>
+  <%= f.input :location, label: 'Current location', collection: User.all.map(&:country_name).uniq.sort!, required: false %>
+  <%= f.submit 'Search' %>
+<% end %>
+
+
+<% @candidates.each do |candidate| %>
+  <div style="display: flex; justify-content: space-between">
+    <p><%= candidate.full_name %></p>
+    <p><%= candidate.email %></p>
+    <p>Approved: <%= candidate.approved %></p>
+    <p><%= candidate.country_name %></p>
+  </div>
+<% end %>
