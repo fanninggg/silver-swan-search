@@ -18,7 +18,7 @@
     <%= f.input :phone_number %>
     <%= f.input :gender, collection: %w[Male Female Other] %>
     <%= f.input :dob %>
-    <%= f.input :location %>
+    <%= f.input :location, as: :country, priority: %w[GB US CA FR DE]%>
     <%= f.input :nationality, collection: Nationality::Nationality.default_option('British') %>
     <%= f.input :experience, collection: %w[1 2 3 4 5] %>
     <%= f.input :fluent_languages, collection: LanguageList::COMMON_LANGUAGES.map(&:name).map { |l| l.match(/Greek/) ? 'Greek' : l }.map { |l| l.match(/Tonga/) ? 'Tonga' : l}.sort!, input_html: { multiple: true } %>
