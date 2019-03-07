@@ -7,6 +7,11 @@ class User < ApplicationRecord
 
   has_many :fluent_languages, dependent: :destroy
   has_many :conversational_languages, dependent: :destroy
+  has_one_attached :photo
+  has_one_attached :cv
+
+  validates :photo, blob: { content_type: :image }, allow_blank: true
+  validates :cv, blob: { content_type: :text }, allow_blank: true
 
   pg_search_scope :search_by_gender, against: :gender
   pg_search_scope :search_by_location, against: :location
