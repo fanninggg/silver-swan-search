@@ -29,6 +29,10 @@ class User < ApplicationRecord
       country.translations[I18n.locale.to_s] || country.name
   end
 
+  def admin?
+    admin
+  end
+
   def self.search_by_age(lower_limit, upper_limit)
    select { |user| user.age >= lower_limit.to_i && user.age <= upper_limit.to_i }
   end

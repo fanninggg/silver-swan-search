@@ -3,6 +3,7 @@ require 'json'
 
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home, :authorise]
+  skip_after_action :verify_authorized
 
   def home
   end

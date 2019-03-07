@@ -19,4 +19,6 @@ User.destroy_all
   user.save!
   LanguageList::COMMON_LANGUAGES.map(&:name).map { |l| l.match(/Greek/) ? 'Greek' : l }.map { |l| l.match(/Tonga/) ? 'Tonga' : l}.sample(rand(1..3)).each { |l| FluentLanguage.create(language: l, user: user) }
   LanguageList::COMMON_LANGUAGES.map(&:name).map { |l| l.match(/Greek/) ? 'Greek' : l }.map { |l| l.match(/Tonga/) ? 'Tonga' : l}.sample(rand(1..3)).each { |l| ConversationalLanguage.create(language: l, user: user) }
+
+  User.create(email: 'admin@admin.com', password: 'password', admin: true)
 end
