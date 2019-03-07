@@ -5,6 +5,7 @@ gem 'bootsnap', require: false
 gem 'devise'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
+gem 'pg_search'
 gem 'puma'
 gem 'rails', '5.2.1'
 gem 'redis'
@@ -18,9 +19,12 @@ gem 'webpacker'
 gem 'rest-client'
 gem 'nationality', '~> 1.0.5', git: 'https://github.com/JomaMinoza/nationality'
 gem 'language_list'
+gem 'country_select', '~> 4.0'
+gem 'countries', require: 'countries/global'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
+  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 end
 
 group :development, :test do
