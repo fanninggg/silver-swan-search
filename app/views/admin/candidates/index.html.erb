@@ -7,6 +7,7 @@
     <%= f.input :age_lower_limit, input_html: {'data-value': params[:search].present? ? params[:search][:age_lower_limit] : 18}, required: false %>
     <%= f.input :age_upper_limit, input_html: {'data-value': params[:search].present? ? params[:search][:age_upper_limit] : 70}, required: false  %>
   </div>
+  <%= f.input :languages, collection: (FluentLanguage.all + ConversationalLanguage.all).map(&:language).uniq.sort!, selected: params[:search].present? ? params[:search][:languages] : '', input_html: { multiple: true , required: false} %>
   <div id="age-slider" style="margin: 0 30px 30px 30px;"></div>
   <%= f.input :experience, collection: ['Less than a year', '1-3', '3-5', '5+'], selected: params[:search].present? ? params[:search][:experience] : '', include_blank: true, required: false %>
   <%= f.submit 'Search' %>

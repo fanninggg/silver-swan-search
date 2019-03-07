@@ -10,6 +10,10 @@ class User < ApplicationRecord
 
   pg_search_scope :search_by_gender, against: :gender
   pg_search_scope :search_by_location, against: :location
+  pg_search_scope :search_by_language, associated_against: {
+    conversational_languages: :language,
+    fluent_languages: :language
+  }
 
   def full_name
     "#{first_name} #{last_name}"
