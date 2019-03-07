@@ -7,6 +7,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.3.1",
     "jquery": "^3.3.1",
+    "nouislider": "^13.1.1",
     "popper.js": "^1.14.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.3",

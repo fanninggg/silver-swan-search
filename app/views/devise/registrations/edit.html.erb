@@ -17,7 +17,7 @@
                 input_html: { autocomplete: "email" }%>
     <%= f.input :phone_number %>
     <%= f.input :gender, collection: %w[Male Female Other] %>
-    <%= f.input :dob %>
+    <%= f.input :dob, start_year: Date.today.year - 90, end_year: Date.today.year - 16, order: [:day, :month, :year], label: 'Date of birth' %>
     <%= f.input :location, as: :country, priority: %w[GB US CA FR DE]%>
     <%= f.input :nationality, collection: Nationality::Nationality.default_option('British') %>
     <%= f.input :experience, collection: %w[1 2 3 4 5] %>

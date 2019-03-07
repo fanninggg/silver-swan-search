@@ -3,6 +3,11 @@
 <%= simple_form_for :search, url: admin_candidates_path, method: :get do |f| %>
   <%= f.input :gender, collection: %w[Male Female Other], selected: params[:search].present? ? params[:search][:gender] : '', include_blank: true, label: 'Gender', required: false %>
   <%= f.input :location, label: 'Current location', collection: User.all.map(&:country_name).uniq.sort!, required: false %>
+  <div style="display: flex; justify-content: space-around;">
+    <%= f.input :age_lower_limit, input_html: {'data-value': params[:search].present? ? params[:search][:age_lower_limit] : 18} %>
+    <%= f.input :age_upper_limit, input_html: {'data-value': params[:search].present? ? params[:search][:age_upper_limit] : 70}  %>
+  </div>
+  <div id="age-slider" style="margin: 0 30px 30px 30px;"></div>
   <%= f.submit 'Search' %>
 <% end %>
 
