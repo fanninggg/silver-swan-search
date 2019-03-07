@@ -20,7 +20,7 @@
     <%= f.input :dob, start_year: Date.today.year - 90, end_year: Date.today.year - 16, order: [:day, :month, :year], label: 'Date of birth' %>
     <%= f.input :location, as: :country, priority: %w[GB US CA FR DE]%>
     <%= f.input :nationality, collection: Nationality::Nationality.default_option('British') %>
-    <%= f.input :experience, collection: %w[1 2 3 4 5] %>
+    <%= f.input :experience, collection: %w[0 1 2 3 4 5+] %>
     <%= f.input :fluent_languages, collection: LanguageList::COMMON_LANGUAGES.map(&:name).map { |l| l.match(/Greek/) ? 'Greek' : l }.map { |l| l.match(/Tonga/) ? 'Tonga' : l}.sort!, input_html: { multiple: true } %>
     <%= f.input :conversational_languages, collection: LanguageList::COMMON_LANGUAGES.map(&:name).map { |l| l.match(/Greek/) ? 'Greek' : l }.map { |l| l.match(/Tonga/) ? 'Tonga' : l}.sort!, input_html: { multiple: true } %>
     <%= f.input :bio %>

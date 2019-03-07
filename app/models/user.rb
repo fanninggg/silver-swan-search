@@ -26,6 +26,21 @@ class User < ApplicationRecord
   end
 
   def self.search_by_age(lower_limit, upper_limit)
-   self.select { |user| user.age >= lower_limit.to_i && user.age <= upper_limit.to_i }
+   select { |user| user.age >= lower_limit.to_i && user.age <= upper_limit.to_i }
+  end
+
+  def self.search_by_experience(query)
+    case query
+    when 'Less than a year'
+      where(experience: 0)
+    when '1-3'
+      where("experience > 0 AND experience < 4")
+    when '3-5'
+      where("experience > 2")
+    when '5+'
+      where(experience: 5)
+    else
+      self
+    end
   end
 end
