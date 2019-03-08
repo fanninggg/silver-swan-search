@@ -10,17 +10,13 @@ const Hello = props => (
   <div>Hello {props.name}!</div>
 )
 
-Hello.defaultProps = {
-  name: 'David'
-}
+var testReact = document.getElementById('test-react')
 
-Hello.propTypes = {
-  name: PropTypes.string
+if (testReact) {
+  document.addEventListener('DOMContentLoaded', () => {
+    ReactDOM.render(
+      <Hello name="React" />,
+      testReact.appendChild(document.createElement('div')),
+    )
+  })
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Hello name="React" />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
