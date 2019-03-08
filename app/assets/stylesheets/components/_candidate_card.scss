@@ -1,0 +1,70 @@
+.candidate-card-holder {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.candidate-card {
+  width: 700px;
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 0.5px solid #C4C4C4;
+}
+
+.candidate-card-image {
+  height: 150px;
+  width: 200px;
+  background-color: gray;
+}
+
+.candidate-card-info {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.grey-text {
+  color: #C4C4C4;
+}
+
+.candidate-card-buttons {
+  width: 175px;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.admin-button {
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.admin-button-text {
+  color: #fff;
+  font-size: 13px;
+}
+
+.maroon-background {
+  background-color: #6B2022;
+}
+
+.grey-background {
+  background-color: #8E8E8E;
+}

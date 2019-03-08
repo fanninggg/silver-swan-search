@@ -1,4 +1,6 @@
-<h1>CANDIDATE INDEX</h1>
+<div class="admin-dashboard-navbar">
+  <h1 class="admin-dashboard-text">Admin Dashboard</h1>
+</div>
 
 <%= simple_form_for :search, url: admin_candidates_path, method: :get do |f| %>
   <%= f.input :gender, collection: %w[Male Female Other], selected: params[:search].present? ? params[:search][:gender] : '', include_blank: true, label: 'Gender', required: false %>
@@ -13,12 +15,41 @@
   <%= f.submit 'Search' %>
 <% end %>
 
-
 <% @candidates.each do |candidate| %>
-  <div style="display: flex; justify-content: space-between">
-    <p><%= candidate.full_name %></p>
-    <p><%= candidate.email %></p>
-    <p>Approved: <%= candidate.approved %></p>
-    <p><%= candidate.country_name %></p>
+  <div class="candidate-card-holder">
+    <div class="candidate-card">
+      <div class="candidate-card-image">
+
+      </div>
+      <div class="candidate-card-info">
+        <div class="candidate-name">
+          <p class="no-margin"><%= candidate.full_name %></p>
+        </div>
+        <div class="candiate-age grey-text">
+          <p class="no-margin"><%= candidate.age %></p>
+        </div>
+        <div class="candidate-gender grey-text">
+          <p class="no-margin"><%= candidate.gender %></p>
+        </div>
+        <div class="candidate-country">
+          <p class="no-margin">Profile 100% complete</p>
+        </div>
+      </div>
+      <div class="candidate-card-buttons">
+        <% if candidate.approved %>
+          <p><%= candidate.first_name %> has been uploaded to Vincere and shortlisted for a role</p>
+        <% else %>
+          <div class="admin-button maroon-background">
+            <a href="#" class="admin-button-text">Upload & Shortlist</a>
+          </div>
+          <div class="admin-button grey-background">
+            <a href="#" class="admin-button-text">Upload to Vincere</a>
+          </div>
+          <div class="admin-button grey-background">
+            <a href="#" class="admin-button-text">Not Suitable</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>
