@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   validates :photo, blob: { content_type: :image }, allow_blank: true
   validates :cv, blob: { content_type: :text }, allow_blank: true
+  validates :first_name, :last_name, :email, presence: true
+  validates :phone_number, :dob, :location, :nationality, :experience, :bio, :gender, presence: true, on: :update
 
   pg_search_scope :search_by_gender, against: :gender
   pg_search_scope :search_by_location, against: :location
