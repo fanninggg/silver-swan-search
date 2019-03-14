@@ -35,7 +35,7 @@ class PagesController < ApplicationController
 
   def make_details(body)
     details = { id_token: body['id_token'], access_token: body['access_token']}
-    details[:refresh_token] = body['refresh_token'] if body[:refresh_token]
+    details[:refresh_token] = body['refresh_token'] if body['refresh_token']
     return details
   end
 end
