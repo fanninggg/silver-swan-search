@@ -14,21 +14,23 @@ class PagesController < ApplicationController
       redirect_to root_path
     end
     code = params[:code]
-    response = RestClient.post("https://id.vinceredev.com/oauth2/token?client_id=#{ENV['CLIENT_ID']}",
-      {
-        code: code,
-        grant_type: 'authorization_code'
-      },
-      {
-        content_type: 'application/x-www-form-urlencoded'
-      }
-    )
-    details = make_details(JSON.parse(response.body))
-    if Credentials.all.any?
-      Credentials.first.update(details)
-    else
-      Credentials.create(details)
+    begin
+      response = RestClient.post("https://id.vincere.io/oauth2/token?client_id=#{ENV['CLIENT_ID']}", {
+          code: code,
+          grant_type: 'authorization_code'
+        }
+      )
+    rescue RestClient::BadRequest => e
+      puts e.response
+      redirect_to root_path
     end
+    details = make_details(JSON.parse(response.body))
+    if Credential.all.any?
+      Credential.first.update(details)
+    else
+      Credential.create(details)
+    end
+    redirect_to root_path
   end
 
   private
