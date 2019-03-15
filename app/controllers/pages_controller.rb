@@ -33,6 +33,20 @@ class PagesController < ApplicationController
     redirect_to root_path
   end
 
+  def credentials
+    if params[:key] == ENV['CREDENTIALS_KEY'] && request.protocol == 'https://'
+      render json: {
+        id_token: id_token,
+        refresh_token: refresh_token,
+        access_token: access_token
+      }, status: 200
+    else
+      render json: {
+        error: 'Not authorized'
+      }, status: 401
+    end
+  end
+
   private
 
   def make_details(body)
