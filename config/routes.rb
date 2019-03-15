@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: :registrations }
   root to: 'pages#home'
   get '/authorise', to: 'pages#authorise'
+  get '/credentials', to: 'pages#credentials'
   namespace :admin do
     resources :candidates, only: [:index]
   end
