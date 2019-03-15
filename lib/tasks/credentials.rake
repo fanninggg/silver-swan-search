@@ -21,7 +21,11 @@ namespace :credentials do
   task fetch_credentials: :environment do
     response = RestClient.get("https://www.silverswansearch.com/credentials?key=#{ENV['CREDENTIALS_KEY']}")
     details = make_details(JSON.parse(response.body))
-    Credential.first.update(details)
+    if Credential.all.any?
+      Credential.first.update(details)
+    else
+      Credential.create(details)
+    end
   end
 
 end
