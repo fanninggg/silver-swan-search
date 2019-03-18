@@ -28,6 +28,11 @@ namespace :credentials do
     end
   end
 
+  desc "Test"
+  task test: :environment do
+    p api_get("/job/search/fl=id,job_title?q=text:\"chalet\" \#")
+  end
+
 end
 
 def make_details(body)
