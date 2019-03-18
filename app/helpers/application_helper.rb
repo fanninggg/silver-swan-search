@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def api_get(end_point)
     begin
-      response = RestClient.get("https://silverswanrecruitment.vincere.io/api/v2#{end_point}", {
+      response = RestClient.get(URI.encode("https://silverswanrecruitment.vincere.io/api/v2#{end_point}"), {
         "id-token" => id_token,
         "x-api-key" => ENV["VINCERE_API_KEY"]
       })
@@ -25,7 +25,7 @@ module ApplicationHelper
 
   def api_post(end_point, payload={})
     begin
-      response = RestClient.post("https://silverswanrecruitment.vincere.io/api/v2#{end_point}", payload, {
+      response = RestClient.post(URI.encode("https://silverswanrecruitment.vincere.io/api/v2#{end_point}"), payload, {
         "id-token" => id_token,
         "x-api-key" => ENV["VINCERE_API_KEY"]
       })
@@ -37,7 +37,7 @@ module ApplicationHelper
 
   def api_put(end_point, payload={})
     begin
-      response = RestClient.put("https://silverswanrecruitment.vincere.io/api/v2#{end_point}", payload, {
+      response = RestClient.put(URI.encode("https://silverswanrecruitment.vincere.io/api/v2#{end_point}"), payload, {
         "id-token" => id_token,
         "x-api-key" => ENV["VINCERE_API_KEY"]
       })
@@ -49,7 +49,7 @@ module ApplicationHelper
 
   def api_delete(end_point)
     begin
-      response = RestClient.delete("https://silverswanrecruitment.vincere.io/api/v2#{end_point}", {
+      response = RestClient.delete(URI.encode("https://silverswanrecruitment.vincere.io/api/v2#{end_point}"), {
         "id-token" => id_token,
         "x-api-key" => ENV["VINCERE_API_KEY"]
       })
