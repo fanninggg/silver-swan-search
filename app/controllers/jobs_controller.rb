@@ -6,6 +6,12 @@ class JobsController < ApplicationController
     @jobs = get_jobs.map { |job| Job.find_by(vincere_id: job["id"]) }
   end
 
+  def show
+    @job = Job.find(params[:id])
+    authorize @job
+    @vincere_job = api_get("/position/#{@job.vincere_id}")
+  end
+
   private
 
   def get_jobs
@@ -13,13 +19,15 @@ class JobsController < ApplicationController
     jobs = response["result"]["items"]
     jobs.each do |job|
       if Job.find_by(vincere_id: job["id"]).nil?
-        Job.create(
+        @job = Job.create(
           vincere_id: job["id"],
           title: job["job_title"],
           company_name: job["company"]["name"] ,
           description: Nokogiri::HTML.parse(job["description"]).text,
           closing_date: job["closed_date"]
         )
+
+        @job.set_salary(api_get("/position/#{@job.vincere_id}")["compensation"])
       end
     end
   end
