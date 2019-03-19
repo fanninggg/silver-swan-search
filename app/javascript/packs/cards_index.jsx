@@ -7,8 +7,26 @@ var cardsIndexElement = document.getElementById('variable-props-test')
 var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
 var authenticityToken =  cardsIndexElement.dataset.authenticitytoken
 
+function makePage(props) {
+  return (
+    <div>
+      {makeSwitch()}
+      {makeCards(props)}
+    </div>
+  )
+}
+
+function makeSwitch() {
+  return (
+    <div>
+      <h1>Hello</h1>
+      <h2>I am the switch</h2>
+    </div>
+  )
+}
+
 function makeCards(props) {
-  if(1 == 1) {
+  if(1 == 2) {
     var cards = makeTinderCards(props)
   } else {
     var cards = makeSmallCards(props)
@@ -40,18 +58,17 @@ function makeTinderCards(props) {
             </button>
           </div>
         </div>
-        <div className="job-index-tinder-buttons">
-        </div>
-        </div>
+      </div>
     )
   })
   return cardArray
 }
 
 function makeSmallCards(props) {
+  var counter = 0
   var cardArray = props.jobsProp.map(function(job) {
     return(
-      <div className="job-index-list-card-holder" key={job.id}>
+      <div className="job-index-list-card-holder" key={job.id} id={counter +=1} >
         <div className="job-index-list-card">
           <img className="job-index-list-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
           <div className="job-index-list-info">
@@ -69,8 +86,9 @@ function makeSmallCards(props) {
   return cardArray
 }
 
+
 const CardsIndexComponent = props => (
-  makeCards(props)
+  makePage(props)
 )
 
 if (cardsIndexElement) {
