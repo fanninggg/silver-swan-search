@@ -1,0 +1,8 @@
+<% @applications.each do |application| %>
+  <%= link_to application_path(application) do %>
+    <div>
+      <h2><%= application.job.title %></h2>
+      <h5><%= application.status %></h3>
+    </div>
+  <% end %>
+<% end %>

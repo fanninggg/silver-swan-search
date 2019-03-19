@@ -15,4 +15,13 @@ class JobApplicationsController < ApplicationController
       render json: { response: 'fail' }
     end
   end
+
+  def index
+    @applications = policy_scope(JobApplication)
+  end
+
+  def show
+    @application = JobApplication.find(params[:id])
+    authorize @application
+  end
 end

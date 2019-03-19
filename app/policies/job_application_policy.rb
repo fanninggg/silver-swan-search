@@ -1,11 +1,15 @@
 class JobApplicationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      scope.where(user: user)
     end
   end
 
   def create?
     true
+  end
+
+  def show?
+    record.user == user
   end
 end
