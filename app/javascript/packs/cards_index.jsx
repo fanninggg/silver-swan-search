@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 const CardsIndexComponent = props => (
-  console.log(props.jobs),
+  console.log(props.jobsProp),
   <div className="job-index-container">
     <div className="job-index-tinder-card">
       <img className="job-index-tinder-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
@@ -26,12 +26,12 @@ const CardsIndexComponent = props => (
 )
 
   var cardsIndexElement = document.getElementById('variable-props-test')
-  // var jobs = cardsIndexElement.dataset.jobs
+  var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
 
 if (cardsIndexElement) {
   document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-      <CardsIndexComponent jobs={cardsIndexElement.dataset.jobs}/>,
+      <CardsIndexComponent jobsProp={jobs}/>,
       cardsIndexElement.appendChild(document.createElement('div')),
     )
   })
