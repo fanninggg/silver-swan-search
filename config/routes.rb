@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :jobs, only: [:index, :show] do
     resources :applications, only: :create, controller: :job_applications
   end
+  resources :applications, only: [:show, :index], controller: :job_applications
   get '/authorise', to: 'pages#authorise'
   get '/credentials', to: 'pages#credentials'
   namespace :admin do

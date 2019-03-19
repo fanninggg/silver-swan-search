@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_many :fluent_languages, dependent: :destroy
   has_many :conversational_languages, dependent: :destroy
+  has_many :job_applications
+  has_many :jobs, through: :job_applications
   has_one_attached :photo
   has_one_attached :cv
 

@@ -1,6 +1,9 @@
 class Job < ApplicationRecord
   validates :title, :closing_date, :description, :company_name, :vincere_id, presence: true
 
+  has_many :job_applications
+  has_many :users, through: :job_applications
+
   def set_salary(info)
     begin
       self.salary = Money.new(info["pay_rate"]*100, info["currency"]).format
