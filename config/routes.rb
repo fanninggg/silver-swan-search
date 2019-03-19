@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: :registrations }
   root to: 'jobs#index'
-  resources :jobs, only: [:index, :show]
+  resources :jobs, only: [:index, :show] do
+    resources :applications, only: :create, controller: :job_applications
+  end
   get '/authorise', to: 'pages#authorise'
   get '/credentials', to: 'pages#credentials'
   namespace :admin do

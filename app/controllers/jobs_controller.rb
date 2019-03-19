@@ -3,7 +3,8 @@ class JobsController < ApplicationController
   skip_after_action :verify_scoped, only: :index
 
   def index
-    # @jobs = get_jobs.map { |job| Job.find_by(vincere_id: job["id"]) }
+    @jobs = get_jobs.map { |job| Job.find_by(vincere_id: job["id"]) }
+    raise
   end
 
   def show
