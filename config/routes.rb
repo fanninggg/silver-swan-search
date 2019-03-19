@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/credentials', to: 'pages#credentials'
   namespace :admin do
     resources :candidates, only: [:index]
+    resources :applications, only: [:index], controller: :job_applications
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

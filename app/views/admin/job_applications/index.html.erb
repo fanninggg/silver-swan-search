@@ -1,0 +1,7 @@
+<% @applications.each do |application| %>
+  <div>
+    <h4><%= application.job.title %></h4>
+    <p><%= application.user.full_name %></p>
+    <p><%= application.user.age %></p>
+  </div>
+<% end %>
