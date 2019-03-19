@@ -9,8 +9,8 @@
 
 
 
-  <!-- <p><%#= @jobs.first.title %></p> -->
-  <div id="variable-props-test" data-jobs=<%= @jobs.first.title %>></div>
+  <!-- <p><%#= @jobs.to_json.gsub(' ', '~') %></p> -->
+  <div id="variable-props-test" data-jobs="<%= @jobs.to_json %>"></div>
 
 
 
