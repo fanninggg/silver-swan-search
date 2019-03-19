@@ -4,7 +4,6 @@ class JobsController < ApplicationController
 
   def index
     @jobs = get_jobs.map { |job| Job.find_by(vincere_id: job["id"]) }
-    raise
   end
 
   def show
