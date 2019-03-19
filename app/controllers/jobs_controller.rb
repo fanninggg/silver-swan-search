@@ -15,7 +15,7 @@ class JobsController < ApplicationController
   private
 
   def get_jobs
-    response =  api_get("/job/search/fl=id,job_title,company,description,closed_date,pay_rate,currency,salary_type?q=closed_date:{NOW TO ALL]#&limit=100")
+    response =  api_get("/job/search/fl=id,job_title,company,description,closed_date?q=closed_date:{NOW TO ALL]#&limit=100")
     jobs = response["result"]["items"]
     jobs.each do |job|
       if Job.find_by(vincere_id: job["id"]).nil?
