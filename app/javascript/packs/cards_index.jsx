@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 var cardsIndexElement = document.getElementById('variable-props-test')
 var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
+var authenticityToken =  cardsIndexElement.dataset.authenticitytoken
 
 function makeCards(props) {
   if(1 == 1) {
@@ -33,6 +35,15 @@ function makeTinderCards(props) {
             </div>
           </div>
           <div className="job-index-tinder-buttons">
+            <button onClick={
+              () => {
+                  axios.post(`/jobs/${job.id}/applications`, {},{ headers: { 'X-CSRF-Token': authenticityToken } })
+                    .then(response => console.log(response.data.response))
+                }
+              }
+            >
+              APPLY FOR AMAZING JOB
+            </button>
           </div>
         </div>
       </div>
