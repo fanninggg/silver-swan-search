@@ -12,17 +12,30 @@ class CardsIndexComponent extends React.Component {
     var authenticityToken =  cardsIndexElement.dataset.authenticitytoken
   }
 
+  state = {
+    view: true
+  }
+
+  toggleView = () => {
+    this.setState({ view: !this.state.view})
+  }
+
   makeSwitch() {
     return (
-      <div>
-        <h1>Hello</h1>
-        <h2>I am the switch</h2>
+      <div >
+        <p className="switch-tag">VIEW</p>
+        <div className="switch-holder">
+
+          <div className="switch-oval" onClick={this.toggleView} style={this.state.view ? {backgroundColor: '#6B2022'} : {backgroundColor: '#fff'}}>
+            <div id="switch-circle" className="switch-circle" onClick={this.toggleView} style={this.state.view ? {right: '1px'} : {left: '1px'}} />
+          </div>
+        </div>
       </div>
     )
   }
 
   makeCards(props) {
-    if(1 == 2) {
+    if(this.state.view == true) {
       var cards = this.makeTinderCards(props)
     } else {
       var cards = this.makeSmallCards(props)
@@ -37,8 +50,8 @@ class CardsIndexComponent extends React.Component {
         <div className="job-index-tinder-card" key={job.id}>
           <img className="job-index-tinder-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
           <div className="job-index-tinder-info">
-            <h1 className="job-index-tinder-title grey roboto bold">{job.title}</h1>
-            <h2 className="job-index-tinder-location roboto regular">Le Manoir, Morzine</h2>
+            <h1 className="title-text grey roboto bold">{job.title}</h1>
+            <h2 className="title-text roboto regular">Le Manoir, Morzine</h2>
             <div className="job-index-tinder-salary">
               <div className="salary-icon"></div>
               <p className="small-grey-text">£25,000 per annum</p>
@@ -84,6 +97,7 @@ class CardsIndexComponent extends React.Component {
   }
 
   render() {
+    console.log(this.props.img1)
     return(
       <div>
         {this.makeSwitch()}

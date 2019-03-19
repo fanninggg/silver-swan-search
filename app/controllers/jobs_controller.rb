@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
-  skip_after_action :verify_scoped, only: :index
+  skip_after_action :verify_policy_scoped, only: :index
 
   def index
     @jobs = get_jobs.map { |job| Job.find_by(vincere_id: job["id"]) }

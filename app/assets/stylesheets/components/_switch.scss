@@ -1,0 +1,29 @@
+.switch-tag {
+  width: 25%;
+  margin: 0 auto;
+  text-align: center
+}
+.switch-holder {
+  display: flex;
+  justify-content: space-around;
+  width: 25%;
+  margin: 0 auto;
+}
+.switch-oval {
+  width: 55px;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px solid #C4C4C4;
+  position: relative;
+}
+
+.switch-circle {
+  background-color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid #C4C4C4;
+  position: absolute;
+  // right: 1px;
+  top: 1px;
+}
