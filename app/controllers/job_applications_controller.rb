@@ -10,10 +10,9 @@ class JobApplicationsController < ApplicationController
       # code to submit application to platform once Silver Swan say we can do this
     end
     if application.save
-      redirect_to root_path
-      flash[:notice] = 'Application received'
+      render json: { response: 'success' }
     else
-      flash[:error] = 'Uh oh, something went wrong'
+      render json: { response: 'fail' }
     end
   end
 end
