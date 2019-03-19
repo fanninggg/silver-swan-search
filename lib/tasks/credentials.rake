@@ -27,7 +27,6 @@ namespace :credentials do
       Credential.create(details)
     end
   end
-
 end
 
 def make_details(body)
