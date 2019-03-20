@@ -13,6 +13,7 @@ class SwipeItem extends React.Component {
   }
 
   state = {
+    rotation: 0,
     left: 0,
     originalOffset: 0,
     velocity: 0,
@@ -20,24 +21,34 @@ class SwipeItem extends React.Component {
     touchStartX: 0,
     prevTouchX: 0,
     beingTouched: false,
-    intervalId: null
+    intervalId: null,
   }
 
   animateSlidingToZero() {
-    let {left, velocity, beingTouched} = this.state;
-    if (!beingTouched && left < -0.01) {
+    let {left, velocity, beingTouched, originalOffset, rotation} = this.state;
+    if (!beingTouched && left <= originalOffset) {
       velocity += 10 * 0.033;
       left += velocity;
-      if (left < -350) {
+      rotation += left * 360;
+      if (left < -300) {
         window.clearInterval(this.state.intervalId);
       }
-      this.setState({left, velocity});
+      this.setState({left, velocity, rotation});
+    // } else if (!beingTouched && left >= originalOffset){
+    //   // velocity += 10 * 0.033;
+    //   left -= velocity;
+    //   rotation = 0;
+    //   if (left > 350) {
+    //     window.clearInterval(this.state.intervalId);
+    //   }
+    //   this.setState({left, velocity, rotation});
     } else if (!beingTouched) {
+      velocity += 10 * 0.033;
       left = 0;
-      velocity = 0;
       window.clearInterval(this.state.intervalId);
       this.setState({left, velocity, intervalId: null, originalOffset: 0});
     }
+    console.log(left, rotation)
   }
 
   handleStart(clientX) {
@@ -61,12 +72,20 @@ class SwipeItem extends React.Component {
       const elapsed = currTime - this.state.timeOfLastDragEvent;
       const velocity = 20 * (touchX - this.state.prevTouchX) / elapsed;
       let deltaX = touchX - this.state.touchStartX + this.state.originalOffset;
-      if (deltaX < -350) {
-      } else if (deltaX > 0) {
-        deltaX = 0;
+      if (deltaX < -300) {
+
+        // Ben this is the trigger point for Disliking a job
+        console.log('Ben this is the trigger point for Disliking a job')
+
+      } else if (deltaX > 300) {
+
+        // Ben this is the trigger point for Liking a job
+        console.log('Ben this is the trigger point for Liking a job')
+
       }
       this.setState({
         left: deltaX,
+        rotation: deltaX * 0.10,
         velocity,
         timeOfLastDragEvent: currTime,
         prevTouchX: touchX
@@ -79,7 +98,7 @@ class SwipeItem extends React.Component {
       velocity: this.state.velocity,
       touchStartX: 0,
       beingTouched: false,
-      intervalId: window.setInterval(this.animateSlidingToZero.bind(this), 33)
+      intervalId: window.setInterval(this.animateSlidingToZero.bind(this), 15)
     });
   }
 
@@ -114,11 +133,10 @@ class SwipeItem extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <li
         className="swipeItem"
-        style={{height: this.state.height + 'px', transition: 'height 250ms ease-in-out'}}
+        style={{transition: 'height 250ms ease-in-out'}}
         onTouchStart={touchStartEvent => this.handleTouchStart(touchStartEvent)}
         onTouchMove={touchMoveEvent => this.handleTouchMove(touchMoveEvent)}
         onTouchEnd={() => this.handleTouchEnd()}
@@ -130,7 +148,7 @@ class SwipeItem extends React.Component {
         <div
           className="job-index-tinder-card"
           key={this.props.jobsProp.id}
-          style={{left: this.state.left + 'px'}}
+          style={{transform: `rotate(${this.state.rotation}deg)`, left: this.state.left + 'px'}}
         >
           <img className="job-index-tinder-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
           <div className="job-index-tinder-info">
@@ -187,6 +205,3 @@ class CardList extends React.Component {
 }
 
 export default CardList;
-
-
-
