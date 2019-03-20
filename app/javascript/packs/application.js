@@ -7,10 +7,27 @@ import "./home_react";
 import "./silver_swan_button";
 import '../components/age_slider'
 
-// ************************Cards Index Component*************************************
+// ************************Old Cards Index Component*************************************
 
 
-import CardsIndexComponent from "./cards_index.jsx.erb";
+// import CardsIndexComponent from "./cards_index";
+
+// var cardsIndexElement = document.getElementById('variable-props-test')
+// var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
+
+
+// if (cardsIndexElement) {
+//   document.addEventListener('DOMContentLoaded', () => {
+//     ReactDOM.render(
+//       <CardsIndexComponent jobsProp={jobs} />,
+//       cardsIndexElement.appendChild(document.createElement('div')),
+//     )
+//   })
+// }
+
+// ********************Tinder Cards*******************************************************
+
+import CardList from "./cards_index";
 
 var cardsIndexElement = document.getElementById('variable-props-test')
 var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
@@ -19,7 +36,7 @@ var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
 if (cardsIndexElement) {
   document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
-      <CardsIndexComponent jobsProp={jobs} />,
+      <CardList />,
       cardsIndexElement.appendChild(document.createElement('div')),
     )
   })
