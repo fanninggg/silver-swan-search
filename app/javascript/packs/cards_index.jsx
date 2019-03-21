@@ -3,6 +3,25 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
+class Switch extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div >
+        <p className="switch-tag">VIEW</p>
+        <div className="switch-holder">
+          <div className="switch-oval" onClick={this.props.handleClick} style={this.props.viewProp ? {backgroundColor: '#6B2022'} : {backgroundColor: '#fff'}}>
+            <div id="switch-circle" className="switch-circle" onClick={this.props.handleClick} style={this.props.viewProp ? {right: '1px'} : {left: '1px'}} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
 class SwipeItem extends React.Component {
   constructor(props) {
     super(props);
@@ -26,22 +45,24 @@ class SwipeItem extends React.Component {
 
   animateSlidingToZero() {
     let {left, velocity, beingTouched, originalOffset, rotation} = this.state;
-    if (!beingTouched && left <= originalOffset) {
+    if (!beingTouched && left < originalOffset) {
       velocity += 10 * 0.033;
-      left += velocity;
-      rotation += left * 360;
+      // left += velocity;
+      left = 0
+      rotation = 0;
       if (left < -300) {
         window.clearInterval(this.state.intervalId);
       }
       this.setState({left, velocity, rotation});
-    // } else if (!beingTouched && left >= originalOffset){
-    //   // velocity += 10 * 0.033;
-    //   left -= velocity;
-    //   rotation = 0;
-    //   if (left > 350) {
-    //     window.clearInterval(this.state.intervalId);
-    //   }
-    //   this.setState({left, velocity, rotation});
+    } else if (!beingTouched && left > originalOffset){
+      velocity += 10 * 0.033;
+      // left -= velocity;
+      left = 0;
+      rotation = 0;
+      if (left > 350) {
+        window.clearInterval(this.state.intervalId);
+      }
+      this.setState({left, velocity, rotation});
     } else if (!beingTouched) {
       velocity += 10 * 0.033;
       left = 0;
@@ -135,7 +156,7 @@ class SwipeItem extends React.Component {
   render() {
     return (
       <li
-        className="swipeItem"
+        className="tinder-card"
         style={{transition: 'height 250ms ease-in-out'}}
         onTouchStart={touchStartEvent => this.handleTouchStart(touchStartEvent)}
         onTouchMove={touchMoveEvent => this.handleTouchMove(touchMoveEvent)}
@@ -146,19 +167,19 @@ class SwipeItem extends React.Component {
         onMouseLeave={() => this.handleMouseLeave()}
       >
         <div
-          className="job-index-tinder-card"
+          className="tinder-card-inner"
           key={this.props.jobsProp.id}
           style={{transform: `rotate(${this.state.rotation}deg)`, left: this.state.left + 'px'}}
         >
-          <img className="job-index-tinder-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-          <div className="job-index-tinder-info">
+          <img className="tinder-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
+          <div className="tinder-info">
             <h1 className="title-text grey roboto bold">{this.props.jobsProp.title}</h1>
             <h2 className="title-text roboto regular">Le Manoir, Morzine</h2>
-            <div className="job-index-tinder-salary">
+            <div className="tinder-salary">
               <div className="salary-icon"></div>
               <p className="small-grey-text">£25,000 per annum</p>
             </div>
-            <div className="job-index-tinder-buttons">
+            <div className="tinder-buttons">
               <button onClick={
                 () => {
                     axios.post(`/jobs/${this.props.jobsProp.id}/applications`, {},{ headers: { 'X-CSRF-Token': authenticityToken } })
@@ -176,32 +197,93 @@ class SwipeItem extends React.Component {
   }
 }
 
-class CardList extends React.Component {
+class ListItem extends React.Component {
   constructor(props) {
     super(props)
-
-    var cardsIndexElement = document.getElementById('variable-props-test')
-    var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
-    var authenticityToken =  cardsIndexElement.dataset.authenticitytoken
-
-    this.state = {
-      counter: 1,
-    };
   }
 
   render() {
+    var counter = 0;
+    return (
+      <div className="job-index-list-card-holder" key={this.props.jobsProp.id} id={counter +=1} >
+        <div className="job-index-list-card">
+          <img className="job-index-list-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
+          <div className="job-index-list-info">
+            <h1 className="small-text roboto light-grey no-margin">{this.props.jobsProp.title}</h1>
+            <h2 className="small-text roboto regular light-grey no-margin">Le Manoir, Morzine</h2>
+            <p className="small-text grey no-margin">£25,000 p/a</p>
+          </div>
+          <div className="job-index-list-more-info">
+            <p className="tiny-text grey underline no-margin">More info</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+
+class CardList extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  tinderOrList() {
     var cardsIndexElement = document.getElementById('variable-props-test')
     var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
     var authenticityToken =  cardsIndexElement.dataset.authenticitytoken
+    if(this.props.viewProp) {
+      return (
+        <ul className="tinderCards">
+          {jobs.map(job =>
+            <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} >
+            </SwipeItem>
+          )}
+        </ul>
+      )
+    } else {
+      return (
+        <ul className="listCards">
+          {jobs.map(job =>
+            <ListItem jobsProp={job} key={`swipeItem-${job.id}`} >
+            </ListItem>
+          )}
+        </ul>
+      )
+    }
+  }
+
+  render() {
+
     return (
-      <ul className="swipeList">
-        {jobs.map(job =>
-          <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} >
-          </SwipeItem>
-        )}
-      </ul>
+      <div>
+        {this.tinderOrList()}
+      </div>
     );
   }
 }
 
-export default CardList;
+class CardIndex extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  state = {
+    view: false
+  }
+
+  toggleView = () => {
+    this.setState({ view: !this.state.view})
+  }
+
+  render() {
+    return(
+      <div>
+        <Switch handleClick={this.toggleView.bind(this)} viewProp={this.state.view}/>
+        <CardList viewProp={this.state.view} />
+      </div>
+    )
+  }
+}
+
+export default CardIndex;
