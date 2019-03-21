@@ -47,9 +47,9 @@ class SwipeItem extends React.Component {
     let {left, velocity, beingTouched, originalOffset, rotation} = this.state;
     if (!beingTouched && left < originalOffset) {
       velocity += 10 * 0.033;
-      // left += velocity;
-      left = 0
-      rotation = 0;
+      left += velocity;
+      // left = 0
+      rotation = left * 0.1;
       if (left < -300) {
         window.clearInterval(this.state.intervalId);
       }
@@ -205,15 +205,15 @@ class ListItem extends React.Component {
   render() {
     var counter = 0;
     return (
-      <div className="job-index-list-card-holder" key={this.props.jobsProp.id} id={counter +=1} >
-        <div className="job-index-list-card">
-          <img className="job-index-list-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
-          <div className="job-index-list-info">
+      <div className="list-card-holder" key={this.props.jobsProp.id} id={counter +=1} >
+        <div className="list-card">
+          <img className="list-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
+          <div className="list-info">
             <h1 className="small-text roboto light-grey no-margin">{this.props.jobsProp.title}</h1>
             <h2 className="small-text roboto regular light-grey no-margin">Le Manoir, Morzine</h2>
-            <p className="small-text grey no-margin">£25,000 p/a</p>
+            <p className="small-text grey no-margin">{this.props.jobsProp.salary} {this.props.jobsProp.salary_type}</p>
           </div>
-          <div className="job-index-list-more-info">
+          <div className="list-more-info">
             <p className="tiny-text grey underline no-margin">More info</p>
           </div>
         </div>
@@ -243,7 +243,7 @@ class CardList extends React.Component {
       )
     } else {
       return (
-        <ul className="listCards">
+        <ul className="list-cards">
           {jobs.map(job =>
             <ListItem jobsProp={job} key={`swipeItem-${job.id}`} >
             </ListItem>
@@ -254,7 +254,6 @@ class CardList extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         {this.tinderOrList()}
@@ -269,7 +268,7 @@ class CardIndex extends React.Component {
   }
 
   state = {
-    view: false
+    view: true
   }
 
   toggleView = () => {
