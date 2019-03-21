@@ -1,10 +1,34 @@
-.job-index-tinder-photo {
+.tinderCards {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tinder-card {
+  position: absolute;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+.tinderCard-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.tinder-card-inner {
+  background-color: #fff;
+  position: absolute;
+}
+
+
+.tinder-photo {
   // height: 40vh;
   width: 100vw;
   // box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-.job-index-tinder-info {
+.tinder-info {
   padding: 5vh 5vw;
 }
 
@@ -12,26 +36,3 @@
   font-size: 16px;
 }
 
-.job-index-tinder-card {
-  background-color: #fff;
-  position: absolute;
-}
-
-// Tinder Swipe Functionality
-.swipeItem {
-  position: absolute;
-  overflow: hidden;
-  width: 100vw;
-  height: 100vh;
-}
-
-.swipeItem-content {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-.swipeList {
-  list-style-type: none;
-  padding: 0;
-}
