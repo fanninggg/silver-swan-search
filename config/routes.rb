@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'jobs#index'
   resources :jobs, only: [:index, :show] do
     resources :applications, only: :create, controller: :job_applications
+    resources :rejections, only: :create, controller: :job_rejections
   end
   resources :applications, only: [:show, :index], controller: :job_applications
   get '/authorise', to: 'pages#authorise'

@@ -10,9 +10,9 @@ class JobApplicationsController < ApplicationController
       # code to submit application to platform once Silver Swan say we can do this
     end
     if application.save
-      render json: { response: 'success' }
+      render json: { response: 'success' }, status: 200
     else
-      render json: { response: 'fail' }
+      render json: { response: 'fail' }, status: 200
     end
   end
 

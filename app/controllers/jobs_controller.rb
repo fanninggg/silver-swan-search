@@ -4,6 +4,7 @@ class JobsController < ApplicationController
 
   def index
     @jobs = get_jobs.map { |job| Job.find_by(vincere_id: job["id"]) }
+    @jobs = @jobs.delete_if { |job| job.applied_for?(current_user) || job.rejected?(current_user) } unless current_user.nil?
   end
 
   def show
