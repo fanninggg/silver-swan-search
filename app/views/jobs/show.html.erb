@@ -1,5 +1,16 @@
-<div class="show-container">
-  <h3><%= @job.title %></h3>
-  <p><%= @job.company_name %></p>
+<div class="job-show-container">
+  <div class="job-show-splash">
+    <div class="job-show-photo-holder">
+      <img class="job-show-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
+    </div>
+    <div class="job-show-info">
+      <div class="posted-share-flex">
+        <p class="small-text">Posted 25/01/2019</p>
+        <a href="#">Share</a>
+      </div>
+      <h1 class="medium-text grey bold"><%= @job.title %></h1>
+      <p class="medium-text grey"><%= @job.company_name %></p>
+    </div>
+  </div>
   <p><%= @job.display_salary %></p>
 </div>

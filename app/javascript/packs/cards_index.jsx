@@ -161,6 +161,7 @@ class SwipeItem extends React.Component {
   }
 
   render() {
+    console.log(this.props.jobIdProp)
     return (
       <li
         className="tinder-card"
@@ -185,6 +186,7 @@ class SwipeItem extends React.Component {
             <div className="tinder-salary">
               <div className="salary-icon"></div>
               <p className="small-grey-text">{this.props.jobsProp.salary} {this.props.jobsProp.salary_type}</p>
+              <a href={`/jobs/${this.props.jobIdProp}`}>More Information</a>
             </div>
             <div className="tinder-buttons">
               <button onClick={
@@ -220,7 +222,7 @@ class ListItem extends React.Component {
             <p className="small-text grey no-margin">{this.props.jobsProp.salary} {this.props.jobsProp.salary_type}</p>
           </div>
           <div className="list-more-info">
-            <p className="tiny-text grey underline no-margin">More info</p>
+            <a className="tiny-text grey underline no-margin" href={`/jobs/${this.props.jobIdProp}`}>More Information</a>
           </div>
         </div>
       </div>
@@ -242,7 +244,7 @@ class CardList extends React.Component {
       return (
         <ul className="tinderCards">
           {jobs.map(job =>
-            <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} authenticityTokenProp={authenticityToken} >
+            <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} jobIdProp={job.id} authenticityTokenProp={authenticityToken} >
             </SwipeItem>
           )}
         </ul>
@@ -252,7 +254,7 @@ class CardList extends React.Component {
       return (
         <ul className="list-cards">
           {jobs.map(job =>
-            <ListItem jobsProp={job} key={`swipeItem-${job.id}`} counterProp={counter +=1} >
+            <ListItem jobsProp={job} key={`swipeItem-${job.id}`} counterProp={counter +=1} jobIdProp={job.id} authenticityTokenProp={authenticityToken}>
             </ListItem>
           )}
         </ul>
