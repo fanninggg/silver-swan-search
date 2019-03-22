@@ -1,18 +1,29 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-silver-swan">
-  <%= link_to "#", class: "navbar-link" do %>
+  <%= link_to "#", class: "filter-link" do %>
     <%= image_tag "filters.png" %>
   <% end %>
-  <%= link_to root_path, class: "navbar-link" do %>
+  <%= link_to root_path, class: "swan-link" do %>
     <%= image_tag "Swan.png" %>
   <% end %>
   <div class="dropdown">
     <%= image_tag "burger.png", id:"dropdownMenuTrigger" %>
-    <div id="dropdown-menu" class="dropdown-menu" >
-      <a class="dropdown-item" href="#">My Jobs</a>
-      <a class="dropdown-item" href="#">My Profile</a>
-      <a class="dropdown-item" href="#">Support</a>
-      <a class="dropdown-item" href="#">Privacy Policy</a>
-    </div>
+    <ul id="dropdown-menu" class="navbar-dropdown" >
+      <li class="dropdown-option">
+        <a class="grey" href="#">My Jobs</a>
+      </li>
+      <div class="navbar-dropdown-divider"></div>
+      <li class="dropdown-option">
+        <a class="grey" href="#">My Profile</a>
+      </li>
+      <div class="navbar-dropdown-divider"></div>
+      <li class="dropdown-option">
+        <a class="grey" href="#">Support</a>
+      </li>
+      <div class="navbar-dropdown-divider"></div>
+      <li class="dropdown-option">
+        <a class="grey" href="#">Privacy Policy</a>
+      </li>
+    </ul>
   </div>
 </div>
 
