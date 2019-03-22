@@ -74,6 +74,7 @@ GEM
     byebug (11.0.0)
     coderay (1.1.2)
     concurrent-ruby (1.1.4)
+    connection_pool (2.2.2)
     countries (3.0.0)
       i18n_data (~> 0.8.0)
       sixarm_ruby_unaccent (~> 1.1)
@@ -82,6 +83,7 @@ GEM
       countries (~> 3.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.4)
+    dalli (2.7.9)
     devise (4.6.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -279,8 +281,10 @@ DEPENDENCIES
   activestorage-validator
   autoprefixer-rails
   bootsnap
+  connection_pool
   countries
   country_select (~> 4.0)
+  dalli
   devise
   dotenv-rails
   faker!
