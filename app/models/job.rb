@@ -15,6 +15,14 @@ class Job < ApplicationRecord
     end
   end
 
+  def rejected?(user)
+    JobRejection.where(job: self, user: user).any?
+  end
+
+  def applied_for?(user)
+    JobApplication.where(job: self, user: user).any?
+  end
+
   def display_salary
     return "No salary information available" if salary.nil? || salary_type.nil?
     case salary_type

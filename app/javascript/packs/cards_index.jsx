@@ -99,12 +99,17 @@ class SwipeItem extends React.Component {
 
         // Ben this is the trigger point for Disliking a job
         console.log('Ben this is the trigger point for Disliking a job')
+        axios.post(`/jobs/${this.props.jobsProp.id}/rejections`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
+          .then(response => console.log(response.data.response))
+          .catch(err => console.log(err.response.data.response))
 
       } else if (deltaX > 300) {
 
         // Ben this is the trigger point for Liking a job
         console.log('Ben this is the trigger point for Liking a job')
-
+        axios.post(`/jobs/${this.props.jobsProp.id}/applications`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
+          .then(response => console.log(response.data.response))
+          .catch(err => console.log(err.response.data.response))
       }
       this.setState({
         left: deltaX,
@@ -237,7 +242,7 @@ class CardList extends React.Component {
       return (
         <ul className="tinderCards">
           {jobs.map(job =>
-            <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} authenticitytokenProp={authenticityToken} >
+            <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} authenticityTokenProp={authenticityToken} >
             </SwipeItem>
           )}
         </ul>
