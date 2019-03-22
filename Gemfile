@@ -11,6 +11,8 @@ gem 'rails', '5.2.1'
 gem 'redis'
 gem 'pundit'
 gem 'activestorage-validator'
+gem 'dalli'
+gem 'connection_pool'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'
