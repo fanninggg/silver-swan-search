@@ -1,0 +1,27 @@
+.job-show-splash {
+  height: 35%;
+  width: 100%;
+  background-color: rgba(247,247,247,1);
+  display: flex;
+  padding: 5vh 0;
+  // justify-content: space-around;
+}
+.job-show-photo-holder {
+  flex: 0 0 35%;
+  display: flex;
+  justify-content: center;
+}
+.job-show-photo {
+  height: 100px;
+  width: 100px;
+  border-radius: 5px;
+}
+.job-show-info {
+  padding-left: 10px;
+  flex: 0 0 65%;
+}
+.posted-share-flex {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10px;
+}
