@@ -46,6 +46,7 @@ class SwipeItem extends React.Component {
   animateSlidingToZero() {
     let {left, velocity, beingTouched, originalOffset, rotation} = this.state;
     if (!beingTouched && left < originalOffset) {
+      console.log(originalOffset)
       velocity += 10 * 0.033;
       left += velocity;
       // left = 0
@@ -54,22 +55,23 @@ class SwipeItem extends React.Component {
         window.clearInterval(this.state.intervalId);
       }
       this.setState({left, velocity, rotation});
-    } else if (!beingTouched && left > originalOffset){
-      velocity += 10 * 0.033;
-      // left -= velocity;
-      left = 0;
-      rotation = 0;
-      if (left > 350) {
-        window.clearInterval(this.state.intervalId);
-      }
-      this.setState({left, velocity, rotation});
+    // } else if (!beingTouched && left > originalOffset){
+    //   // console.log(originalOffset)
+    //   velocity += 10 * 0.033;
+    //   left -= velocity;
+    //   // left = 0;
+    //   rotation = left * .05;
+    //   if (left > 350) {
+    //     window.clearInterval(this.state.intervalId);
+    //   }
+    //   this.setState({left, velocity, rotation});
     } else if (!beingTouched) {
       velocity += 10 * 0.033;
       left = 0;
       window.clearInterval(this.state.intervalId);
       this.setState({left, velocity, intervalId: null, originalOffset: 0});
     }
-    console.log(left, rotation)
+    // console.log(left, rotation)
   }
 
   handleStart(clientX) {
@@ -177,12 +179,12 @@ class SwipeItem extends React.Component {
             <h2 className="title-text roboto regular">Le Manoir, Morzine</h2>
             <div className="tinder-salary">
               <div className="salary-icon"></div>
-              <p className="small-grey-text">£25,000 per annum</p>
+              <p className="small-grey-text">{this.props.jobsProp.salary} {this.props.jobsProp.salary_type}</p>
             </div>
             <div className="tinder-buttons">
               <button onClick={
                 () => {
-                    axios.post(`/jobs/${this.props.jobsProp.id}/applications`, {},{ headers: { 'X-CSRF-Token': authenticityToken } })
+                    axios.post(`/jobs/${this.props.jobsProp.id}/applications`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
                       .then(response => console.log(response.data.response))
                   }
                 }
@@ -203,9 +205,8 @@ class ListItem extends React.Component {
   }
 
   render() {
-    var counter = 0;
     return (
-      <div className="list-card-holder" key={this.props.jobsProp.id} id={counter +=1} >
+      <div className="list-card-holder" key={this.props.jobsProp.id} id={this.props.counterProp} >
         <div className="list-card">
           <img className="list-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
           <div className="list-info">
@@ -236,16 +237,17 @@ class CardList extends React.Component {
       return (
         <ul className="tinderCards">
           {jobs.map(job =>
-            <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} >
+            <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} authenticitytokenProp={authenticityToken} >
             </SwipeItem>
           )}
         </ul>
       )
     } else {
+    var counter = 0;
       return (
         <ul className="list-cards">
           {jobs.map(job =>
-            <ListItem jobsProp={job} key={`swipeItem-${job.id}`} >
+            <ListItem jobsProp={job} key={`swipeItem-${job.id}`} counterProp={counter +=1} >
             </ListItem>
           )}
         </ul>
