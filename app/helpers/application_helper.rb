@@ -19,7 +19,7 @@ module ApplicationHelper
       })
       JSON.parse(response.body)
     rescue RestClient::ExceptionWithResponse => err
-      err.response.body
+      err.response
     end
   end
 

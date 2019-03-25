@@ -13,8 +13,10 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     authorize @job
 
-    @vincere_job = Rails.cache.fetch("/vincere_job/#{@job.id}", expires_in: 2.hours) do
-      api_get("/position/#{@job.vincere_id}")
+    @vincere_job = Rails.cache.fetch("vincere_job/#{@job.id}", expires_in: 2.hours) do
+      response = api_get("/position/#{@job.vincere_id}")
+      raise StandardError, "No credentials" unless response.is_a?(Hash)
+      response
     end
   end
 
@@ -22,6 +24,7 @@ class JobsController < ApplicationController
 
   def get_jobs
     response = api_get("/job/search/fl=id,job_title,company,description,closed_date?q=closed_date:{NOW TO ALL]#&limit=100")
+    raise StandardError, "No credentials" unless response.is_a?(Hash)
     jobs = response["result"]["items"]
     jobs.each do |job|
       if Job.find_by(vincere_id: job["id"]).nil?
