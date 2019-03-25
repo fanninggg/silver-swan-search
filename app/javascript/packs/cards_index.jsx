@@ -100,7 +100,6 @@ class SwipeItem extends React.Component {
         this.setState({ triggered: true })
 
         // Ben this is the trigger point for Disliking a job
-        console.log('Ben this is the trigger point for Disliking a job')
         axios.post(`/jobs/${this.props.jobsProp.id}/rejections`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
           .then(response => console.log(response.data.response))
           .catch(err => console.log(err.response.data.response))
@@ -108,7 +107,6 @@ class SwipeItem extends React.Component {
       } else if (deltaX > 300 && !this.state.triggered) {
         this.setState({ triggered: true })
         // Ben this is the trigger point for Liking a job
-        console.log('Ben this is the trigger point for Liking a job')
         axios.post(`/jobs/${this.props.jobsProp.id}/applications`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
           .then(response => console.log(response.data.response))
           .catch(err => console.log(err.response.data.response))
@@ -145,12 +143,10 @@ class SwipeItem extends React.Component {
   }
 
   handleMouseDown(mouseDownEvent) {
-    console.log(mouseDownEvent)
     this.handleStart(mouseDownEvent.clientX);
   }
 
   handleMouseMove(mouseMoveEvent) {
-    console.log(mouseMoveEvent)
     this.handleMove(mouseMoveEvent.clientX);
   }
 
@@ -160,6 +156,14 @@ class SwipeItem extends React.Component {
 
   handleMouseLeave() {
     this.handleMouseUp();
+  }
+
+  like() {
+    console.log("I am liked :)")
+  }
+
+  dislike() {
+    console.log("I am disliked :(")
   }
 
   render() {
@@ -187,18 +191,24 @@ class SwipeItem extends React.Component {
             <div className="tinder-salary">
               <div className="salary-icon"></div>
               <p className="small-grey-text">{this.props.jobsProp.salary} {this.props.jobsProp.salary_type}</p>
-              <a href={`/jobs/${this.props.jobIdProp}`}>More Information</a>
+              <a href={`/jobs/${this.props.jobIdProp}`} className="grey underline more-info-link">More Information</a>
             </div>
             <div className="tinder-buttons">
-              <button onClick={
+              <a onClick={this.dislike}>
+                <div className="dislike-button"></div>
+              </a>
+              <a className="silver-swan-buttonlink" onClick={
                 () => {
                     axios.post(`/jobs/${this.props.jobsProp.id}/applications`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
                       .then(response => console.log(response.data.response))
                   }
                 }
               >
-                APPLY FOR AMAZING JOB
-              </button>
+                <div className="silver-swan-button">Apply Now</div>
+              </a>
+              <a onClick={this.like}>
+                <div className="like-button"></div>
+              </a>
             </div>
           </div>
         </div>
