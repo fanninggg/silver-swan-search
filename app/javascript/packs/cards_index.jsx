@@ -204,7 +204,7 @@ class SwipeItem extends React.Component {
                   }
                 }
               >
-                <div className="silver-swan-button">Apply Now</div>
+                <div className="silver-swan-button small-silver-swan-button">Apply Now</div>
               </a>
               <a onClick={this.like}>
                 <div className="like-button"></div>

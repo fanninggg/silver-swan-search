@@ -1,0 +1,25 @@
+.signup-logo-holder {
+  height: 35vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.signup-logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.small-swan {
+  height: 75px;
+}
+
+.signup-title {
+  font-size: 28px;
+}
+
+.signup-form {
+  height: 65vh;
+}
