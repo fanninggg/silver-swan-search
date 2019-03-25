@@ -42,9 +42,23 @@
           <div class="admin-button maroon-background">
             <a href="#" class="admin-button-text">Upload & Shortlist</a>
           </div>
-          <div class="admin-button grey-background">
-            <a href="#" class="admin-button-text">Upload to Vincere</a>
-          </div>
+          <% if candidate.cv.attached? %>
+            <div class="admin-button maroon-background">
+              <a
+                href="<%= url_for(candidate.cv) %>"
+                class="admin-button-text"
+                type="application/octet-stream"
+                target = "_blank"
+                download
+              >
+                Download CV
+              </a>
+            </div>
+          <% else %>
+            <div class="admin-button grey-background">
+              <a href="#" class="admin-button-text">No CV available</a>
+            </div>
+          <% end %>
           <div class="admin-button grey-background">
             <a href="#" class="admin-button-text">Not Suitable</a>
           </div>

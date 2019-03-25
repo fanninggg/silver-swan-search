@@ -12,8 +12,10 @@ class User < ApplicationRecord
   has_one_attached :photo
   has_one_attached :cv
 
+  after_save :update_cv_file_name
+
   validates :photo, blob: { content_type: :image }, allow_blank: true
-  validates :cv, blob: { content_type: :text }, allow_blank: true
+  validates :cv, blob: { content_type: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.oasis.opendocument.text'] }, allow_blank: true
   validates :first_name, :last_name, :email, presence: true
   validates :phone_number, :dob, :location, :nationality, :experience, :bio, :gender, presence: true, on: :update
 
@@ -23,6 +25,12 @@ class User < ApplicationRecord
     conversational_languages: :language,
     fluent_languages: :language
   }
+
+  def update_cv_file_name
+    if cv.attached?
+      cv.blob.update(filename: "#{first_name}_#{last_name}_cv.#{cv.filename.extension}".downcase)
+    end
+  end
 
   def full_name
     "#{first_name} #{last_name}"
