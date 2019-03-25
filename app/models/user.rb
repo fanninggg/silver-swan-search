@@ -18,6 +18,7 @@ class User < ApplicationRecord
   validates :cv, blob: { content_type: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.oasis.opendocument.text'] }, allow_blank: true
   validates :first_name, :last_name, :email, presence: true
   validates :phone_number, :dob, :location, :nationality, :experience, :bio, :gender, presence: true, on: :update
+  validates :accepts_terms, acceptance: { message: 'must be accepted' }
 
   pg_search_scope :search_by_gender, against: :gender
   pg_search_scope :search_by_location, against: :location
