@@ -1,0 +1,46 @@
+.login-logo-holder {
+  height: 45vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.login-logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.login-title {
+  font-size: 32px;
+}
+
+.login-form {
+  height: 55vh;
+}
+
+.form-control {
+  border-radius: 20px;
+  padding-left: 20px;
+  width: 80vw;
+  margin-left: 10vw;
+  color: #8E8E8E;
+  box-shadow: 0 0 5px rgba(0,0,0,0.13);
+  border: none;
+  &:focus {
+    color: #8E8E8E;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.30);
+    border: none;
+  }
+}
+
+.login-ss-button {
+  width: 80vw;
+  margin-left: 10vw;
+}
+.forgotten-password {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
