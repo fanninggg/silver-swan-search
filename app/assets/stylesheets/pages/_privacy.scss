@@ -1,0 +1,29 @@
+.privacy-logo-holder {
+  height: 30vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.privacy-logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.privacy-title {
+  font-size: 32px;
+}
+
+.privacy-policy {
+  margin: 0 5vw;
+}
+
+.privacy-subtitle {
+  margin-bottom: 5vh;
+}
+
+.privacy-text {
+  margin-bottom: 5vh;
+}
