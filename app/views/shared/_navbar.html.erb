@@ -13,7 +13,7 @@
       </li>
       <div class="navbar-dropdown-divider"></div>
       <li class="dropdown-option">
-        <a class="grey" href="#">My Profile</a>
+        <%= link_to 'My Profile', edit_user_registration_path, class: 'grey' %>
       </li>
       <div class="navbar-dropdown-divider"></div>
       <li class="dropdown-option">
@@ -23,6 +23,16 @@
       <li class="dropdown-option">
         <a class="grey" href="#">Privacy Policy</a>
       </li>
+      <div class="navbar-dropdown-divider"></div>
+      <% if current_user %>
+        <li class="dropdown-option">
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'grey' %>
+        </li>
+      <% else %>
+        <li class="dropdown-option">
+          <%= link_to 'Login', new_user_session_path, class: 'grey' %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
