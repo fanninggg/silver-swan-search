@@ -5,6 +5,7 @@ tmp/*
 !log/.keep
 !tmp/.keep
 !storage/.keep
+/storage
 *.swp
 .DS_Store
 public/assets
