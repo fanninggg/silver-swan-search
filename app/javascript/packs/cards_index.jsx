@@ -241,24 +241,52 @@ class CardList extends React.Component {
     var cardsIndexElement = document.getElementById('variable-props-test')
     var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
     var authenticityToken =  cardsIndexElement.dataset.authenticitytoken
-    if(this.props.viewProp) {
-      return (
-        <ul className="tinderCards">
-          {jobs.map(job =>
-            <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} jobIdProp={job.id} authenticityTokenProp={authenticityToken} >
-            </SwipeItem>
-          )}
-        </ul>
-      )
+    if(jobs.length > 0 ) {
+      if(this.props.viewProp) {
+        return (
+          <ul className="tinderCards">
+            {jobs.map(job =>
+              <SwipeItem jobsProp={job} key={`swipeItem-${job.id}`} jobIdProp={job.id} authenticityTokenProp={authenticityToken} >
+              </SwipeItem>
+            )}
+          </ul>
+        )
+      } else {
+      var counter = 0;
+        return (
+          <ul className="list-cards">
+            {jobs.map(job =>
+              <ListItem jobsProp={job} key={`swipeItem-${job.id}`} counterProp={counter +=1} jobIdProp={job.id} authenticityTokenProp={authenticityToken}>
+              </ListItem>
+            )}
+          </ul>
+        )
+      }
     } else {
-    var counter = 0;
       return (
-        <ul className="list-cards">
-          {jobs.map(job =>
-            <ListItem jobsProp={job} key={`swipeItem-${job.id}`} counterProp={counter +=1} jobIdProp={job.id} authenticityTokenProp={authenticityToken}>
-            </ListItem>
-          )}
-        </ul>
+        <div className="no-jobs-container">
+          <div className="quarter-screen grey-background">
+            <h5 className="maroon bold">There are no more jobs which match your criteria</h5>
+          </div>
+          <div className="quarter-screen">
+            <div>
+              <p className="grey small-text">To see more results, please edit your filters,</p>
+              <img src="/assets/images/filters2.png" alt=""/>
+            </div>
+          </div>
+          <div className="quarter-screen grey-background">
+            <div>
+              <p className="grey small-text">refresh your results,</p>
+              <img src="/assets/images/refresh.png" alt=""/>
+            </div>
+          </div>
+          <div className="quarter-screen">
+            <div>
+              <p className="grey small-text">or see a random job</p>
+              <img src="/assets/images/shuffle.png" alt=""/>
+            </div>
+          </div>
+        </div>
       )
     }
   }
@@ -271,6 +299,7 @@ class CardList extends React.Component {
     );
   }
 }
+
 
 class CardIndex extends React.Component {
   constructor(props) {
@@ -285,10 +314,20 @@ class CardIndex extends React.Component {
     this.setState({ view: !this.state.view})
   }
 
+  swicthOrNah() {
+    var cardsIndexElement = document.getElementById('variable-props-test')
+    var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
+    if(jobs.length > 0 ) {
+      return(
+        <Switch handleClick={this.toggleView.bind(this)} viewProp={this.state.view}/>
+      )
+    }
+  }
+
   render() {
     return(
       <div>
-        <Switch handleClick={this.toggleView.bind(this)} viewProp={this.state.view}/>
+        {this.swicthOrNah()}
         <CardList viewProp={this.state.view} />
       </div>
     )

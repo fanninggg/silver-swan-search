@@ -1,0 +1,12 @@
+.no-jobs-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 45.19px);
+}
+.quarter-screen {
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center
+}
