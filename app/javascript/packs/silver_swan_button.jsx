@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 const SSButton = props => (
-  <a href={props.linkTarget} className="silver-swan-button">{props.linkText}</a>
+  <a href={props.linkTarget} className="silver-swan-button-link">
+    <div className="silver-swan-button">{props.linkText}</div>
+  </a>
 )
 
 var buttonElement = document.getElementById('silver-swan-button')

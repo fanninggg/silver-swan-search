@@ -12,5 +12,21 @@
       <p class="medium-text grey"><%= @job.company_name %></p>
     </div>
   </div>
-  <p><%= @job.display_salary %></p>
+  <div class="job-show-details">
+    <h5 class="maroon">Responsibilities</h5>
+    <ul class="show-list">
+      <li class="grey small-text">Involvement in staff training</li>
+      <li class="grey small-text">During evening service you will assist the other hosts on duty and the chef in the chalet with drinks service, guest hosting & laying the table, serving at the table and general kitchen help, washing up etc. Evening bedroom turndown service is offered to guests.</li>
+      <li class="grey small-text">Chalet maintenance - Generally ensuring any items that need attention are dealt with efficiently & quickly.</li>
+    </ul>
+    <h5 class="maroon">Benefits</h5>
+    <ul class="show-list">
+      <li class="grey small-text"><%= @job.display_salary %></li>
+      <li class="grey small-text">Accommodation is provided</li>
+      <li class="grey small-text">Ski/Board equipment is provided for the season.</li>
+      <li class="grey small-text">Lift pass</li>
+    </ul>
+
+    <div id="silver-swan-button" data-linkTarget="#" data-linkText="Apply Now"></div>
+  </div>
 </div>

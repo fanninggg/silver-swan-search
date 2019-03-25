@@ -12,7 +12,6 @@ import CardIndex from "./cards_index";
 
 var cardsIndexElement = document.getElementById('variable-props-test')
 
-
 if (cardsIndexElement) {
   var jobs = JSON.parse(cardsIndexElement.dataset.jobs);
   document.addEventListener('DOMContentLoaded', () => {
@@ -22,4 +21,5 @@ if (cardsIndexElement) {
     )
   })
 }
+
 
