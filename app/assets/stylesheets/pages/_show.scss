@@ -1,3 +1,6 @@
+.job-show-details {
+  margin: 0 5vw;
+}
 .job-show-splash {
   height: 35%;
   width: 100%;
@@ -24,4 +27,17 @@
   display: flex;
   justify-content: space-between;
   margin-right: 10px;
+}
+.show-list {
+  list-style-type: none;
+}
+
+.show-list li::before {
+  content: "\2022";
+  color: #6B2022;
+  font-weight: bold;
+  font-size: 1rem;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
