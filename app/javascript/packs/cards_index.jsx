@@ -41,6 +41,7 @@ class SwipeItem extends React.Component {
     prevTouchX: 0,
     beingTouched: false,
     intervalId: null,
+    triggered: false
   }
 
   animateSlidingToZero() {
@@ -95,7 +96,8 @@ class SwipeItem extends React.Component {
       const elapsed = currTime - this.state.timeOfLastDragEvent;
       const velocity = 20 * (touchX - this.state.prevTouchX) / elapsed;
       let deltaX = touchX - this.state.touchStartX + this.state.originalOffset;
-      if (deltaX < -300) {
+      if (deltaX < -300 && !this.state.triggered) {
+        this.setState({ triggered: true })
 
         // Ben this is the trigger point for Disliking a job
         console.log('Ben this is the trigger point for Disliking a job')
@@ -103,8 +105,8 @@ class SwipeItem extends React.Component {
           .then(response => console.log(response.data.response))
           .catch(err => console.log(err.response.data.response))
 
-      } else if (deltaX > 300) {
-
+      } else if (deltaX > 300 && !this.state.triggered) {
+        this.setState({ triggered: true })
         // Ben this is the trigger point for Liking a job
         console.log('Ben this is the trigger point for Liking a job')
         axios.post(`/jobs/${this.props.jobsProp.id}/applications`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
@@ -161,7 +163,6 @@ class SwipeItem extends React.Component {
   }
 
   render() {
-    console.log(this.props.jobIdProp)
     return (
       <li
         className="tinder-card"
