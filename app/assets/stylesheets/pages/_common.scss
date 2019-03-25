@@ -4,12 +4,32 @@ body {
 .roboto {
   font-family: 'Roboto', 'sans-serif';
 }
+
+// FONT WEIGHTS
 .bold {
   font-weight: bold;
 }
 .regular {
   font-weight: lighter;
 }
+
+// FONT SIXES
+.medium-text {
+  font-size: 3vh;
+}
+.small-text {
+  font-size: 2.5vh;
+}
+.tiny-text {
+  font-size: 2vh;
+}
+
+// TEXT DECORATIONS
+.underline {
+  text-decoration: underline;
+}
+
+// Colors
 .grey {
   color: #676767;
 }
@@ -22,6 +42,8 @@ body {
 .grey-background {
   background-color: #F7F7F7;
 }
+
+// Margins
 .no-margin {
   margin: 0;
 }
@@ -36,13 +58,4 @@ body {
 }
 .no-left-margin {
   margin-left: 0;
-}
-.medium-text {
-  font-size: 3vh;
-}
-.small-text {
-  font-size: 2.5vh;
-}
-.tiny-text {
-  font-size: 2vh;
 }
