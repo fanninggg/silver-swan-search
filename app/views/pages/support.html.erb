@@ -27,19 +27,21 @@
     <p class="grey small-text text-center">If you have run into any issues while using Silver Swan Search then we would love to hear about them so that we can fix them ASAP</p>
     <%= simple_form_for :report, url: report_path do |f| %>
     <%= f.input :email,
-                placeholder: 'email',
+                placeholder: 'Your Email',
                 label: false,
                 input_html: {
-                  value: params[:report].present? ? params[:report][:email] : (current_user ? current_user.email : nil)
+                  value: params[:report].present? ? params[:report][:email] : (current_user ? current_user.email : nil), class: "support-form"
                 } %>
     <%= f.input :content,
                 as: :text,
                 placeholder: 'Your issue....',
                 label: false,
                 input_html: {
-                  value: params[:report].present? ? params[:report][:content] : nil
+                  value: params[:report].present? ? params[:report][:content] : nil, class: "support-form"
                 } %>
-    <%= f.submit 'Report' %>
+    <div class="silver-swan-button big-silver-swan-button">
+      <input type="submit" name="commit" value="Report" data-disable-with="Report" class="white roboto small-text">
+    </div>
     <% end %>
 
     <p class="grey small-text text-center">Or if you would like to get in contact with the developers. Please visit us at <br><a href="https://hoxton-digital.com" class="grey underline">hoxton-digital.com</a></p>
