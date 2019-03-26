@@ -1,15 +1,10 @@
 class Job < ApplicationRecord
-  include PgSearch
   validates :title, :closing_date, :description, :company_name, :vincere_id, presence: true
 
   has_many :job_applications
   has_many :users, through: :job_applications
   has_many :likes
   has_many :liking_users, through: :likes, source: :user
-
-  pg_search_scope :search_by_like, associated_against: {
-    liking_users: :id
-  }
 
   def set_salary(info)
     begin

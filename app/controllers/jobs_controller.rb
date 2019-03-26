@@ -22,6 +22,6 @@ class JobsController < ApplicationController
   end
 
   def liked_jobs
-    @jobs = Job.search_by_like(current_user.id)
+    @jobs = current_user.liked_jobs
   end
 end
