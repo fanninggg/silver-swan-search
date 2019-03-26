@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :conversational_languages, dependent: :destroy
   has_many :job_applications
   has_many :jobs, through: :job_applications
+  has_many :likes
+  has_many :liked_jobs, through: :likes, source: :job
   has_one_attached :photo
   has_one_attached :cv
 
@@ -26,6 +28,9 @@ class User < ApplicationRecord
     conversational_languages: :language,
     fluent_languages: :language
   }
+  # pg_search_scope :search_by_application_sector, associated_against: {
+  #   jobs: :sector
+  # }
 
   def update_cv_file_name
     if cv.attached?
