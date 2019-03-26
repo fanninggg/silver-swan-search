@@ -2,13 +2,16 @@ require 'rest-client'
 require 'json'
 
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home, :authorise, :credentials, :privacy]
+  skip_before_action :authenticate_user!, only: [:home, :authorise, :credentials, :privacy, :support]
   skip_after_action :verify_authorized
 
   def home
   end
 
   def privacy
+  end
+
+  def support
   end
 
   def authorise
