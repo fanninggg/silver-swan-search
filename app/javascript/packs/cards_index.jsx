@@ -187,7 +187,7 @@ class SwipeItem extends React.Component {
           <img className="tinder-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
           <div className="tinder-info">
             <h1 className="title-text grey roboto bold">{this.props.jobsProp.title}</h1>
-            <h2 className="title-text roboto regular">Le Manoir, Morzine</h2>
+            <h2 className="title-text roboto lighter">Le Manoir, Morzine</h2>
             <div className="tinder-salary">
               <div className="salary-icon"></div>
               <p className="small-grey-text">{this.props.jobsProp.salary} {this.props.jobsProp.salary_type}</p>
@@ -229,7 +229,7 @@ class ListItem extends React.Component {
           <img className="list-photo" src="https://images.pexels.com/photos/722681/white-snow-forest-winter-722681.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="" />
           <div className="list-info">
             <h1 className="small-text roboto light-grey no-margin">{this.props.jobsProp.title}</h1>
-            <h2 className="small-text roboto regular light-grey no-margin">Le Manoir, Morzine</h2>
+            <h2 className="small-text roboto lighter light-grey no-margin">Le Manoir, Morzine</h2>
             <p className="small-text grey no-margin">{this.props.jobsProp.salary} {this.props.jobsProp.salary_type}</p>
           </div>
           <div className="list-more-info">

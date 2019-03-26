@@ -1,8 +1,9 @@
 <div class="admin-user-dashboard">
   <div class="admin-user-filters">
+    <h1 class="light-grey filter-title">Filter Results</h1>
     <%= simple_form_for :search, url: admin_candidates_path, method: :get do |f| %>
-      <%= f.input :gender, collection: %w[Male Female Other], selected: params[:search].present? ? params[:search][:gender] : '', include_blank: true, label: 'Gender', required: false, input_html: {class: "admin-form"} %>
-      <%= f.input :location, label: 'Current location', collection: User.where(admin: false).map(&:country_name).uniq.sort!, required: false, input_html: {class: "admin-form"} %>
+      <%= f.input :gender, collection: %w[Male Female Other], selected: params[:search].present? ? params[:search][:gender] : '', include_blank: true, label: 'GENDER', required: false, input_html: {class: "admin-form"} %>
+      <%= f.input :location, label: 'CURRENT LOCATION', collection: User.where(admin: false).map(&:country_name).uniq.sort!, required: false, input_html: {class: "admin-form"} %>
 
       <div class="slider-flex">
         <div class="form-group string optional search_age_lower_limit no-margin">
@@ -14,13 +15,25 @@
         </div>
       </div>
 
-      <%= f.input :languages, collection: (FluentLanguage.all + ConversationalLanguage.all).map(&:language).uniq.sort!, selected: params[:search].present? ? params[:search][:languages] : '', input_html: { class: "admin-form", multiple: true , required: false} %>
-      <%= f.input :experience, collection: ['Less than a year', '1-3', '3-5', '5+'], selected: params[:search].present? ? params[:search][:experience] : '', include_blank: true, required: false, input_html: {class: "admin-form"} %>
+      <%= f.input :languages, collection: (FluentLanguage.all + ConversationalLanguage.all).map(&:language).uniq.sort!, selected: params[:search].present? ? params[:search][:languages] : '', input_html: { class: "admin-form", multiple: true , required: false}, label: 'LANGUAGES' %>
+      <%= f.input :experience, collection: ['Less than a year', '1-3', '3-5', '5+'], selected: params[:search].present? ? params[:search][:experience] : '', include_blank: true, required: false, input_html: {class: "admin-form"}, label: 'EXPERIENCE' %>
       <%= f.submit 'Search' %>
     <% end %>
   </div>
   <div class="admin-user-index">
-    <% @candidates.each do |candidate| %>
+    <div class="admin-user-index-header">
+      <div class="admin-user-index-tabs">
+        <!-- These are fake for now -->
+        <p class="maroon underline bold">Users (157)</p>
+        <p class="grey">Shortlisted (24)</p>
+        <p class="grey">Not Interested (10)</p>
+      </div>
+      <div class="admin-user-index-search">
+
+      </div>
+    </div>
+    <div class="admin-user-cards-holder">
+      <% @candidates.each do |candidate| %>
       <div class="candidate-card-holder">
         <div class="candidate-card">
           <div class="candidate-card-image">
@@ -72,5 +85,6 @@
         </div>
       </div>
     <% end %>
+    </div>
   </div>
 </div>
