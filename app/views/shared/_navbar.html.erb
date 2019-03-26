@@ -17,11 +17,11 @@
       </li>
       <div class="navbar-dropdown-divider"></div>
       <li class="dropdown-option">
-        <a class="grey" href="#">Support</a>
+        <%= link_to 'Support', support_path, class: 'grey' %>
       </li>
       <div class="navbar-dropdown-divider"></div>
       <li class="dropdown-option">
-        <a class="grey" href="#">Privacy Policy</a>
+        <%= link_to 'Privacy Policy', privacy_policy_path, class: 'grey' %>
       </li>
       <div class="navbar-dropdown-divider"></div>
       <% if current_user %>
