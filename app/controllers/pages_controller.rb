@@ -14,6 +14,22 @@ class PagesController < ApplicationController
   def support
   end
 
+  def report
+    email = params[:report][:email]
+    content = params[:report][:content]
+    if email.blank? || content.blank?
+      flash[:alert] = 'You must completely fill out the form'
+      render :support
+    elsif !email.match(/@/)
+      flash[:alert] = 'You must use a valid email address'
+      render :support
+    else
+      raise
+      SupportMailer.bug_report(content, email).deliver_now
+      redirect_to root_path
+    end
+  end
+
   def authorise
     unless params[:state] == 'requested'
       flash[:alert] = 'You are not authorised to be here'
