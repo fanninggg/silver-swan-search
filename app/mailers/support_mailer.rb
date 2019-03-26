@@ -5,10 +5,8 @@ class SupportMailer < ApplicationMailer
   #
   #   en.support_mailer.bug_report.subject
   #
-  def bug_report(content, email)
+  def bug_report(content)
     @content = content
-    @email = email
-
     mail to: "bugs-r-bad@silverswan.co.uk"
   end
 end
