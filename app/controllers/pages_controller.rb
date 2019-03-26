@@ -15,17 +15,12 @@ class PagesController < ApplicationController
   end
 
   def report
-    email = params[:report][:email]
     content = params[:report][:content]
-    if email.blank? || content.blank?
-      flash[:alert] = 'You must completely fill out the form'
-      render :support
-    elsif !email.match(/@/)
-      flash[:alert] = 'You must use a valid email address'
+    if content.blank?
+      flash[:alert] = 'You must fill out the form'
       render :support
     else
-      raise
-      SupportMailer.bug_report(content, email).deliver_now
+      SupportMailer.bug_report(content).deliver_now
       redirect_to root_path
     end
   end

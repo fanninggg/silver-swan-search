@@ -26,12 +26,6 @@
     </div>
     <p class="grey small-text text-center">If you have run into any issues while using Silver Swan Search then we would love to hear about them so that we can fix them ASAP</p>
     <%= simple_form_for :report, url: report_path do |f| %>
-    <%= f.input :email,
-                placeholder: 'Your Email',
-                label: false,
-                input_html: {
-                  value: params[:report].present? ? params[:report][:email] : (current_user ? current_user.email : nil), class: "support-form"
-                } %>
     <%= f.input :content,
                 as: :text,
                 placeholder: 'Your issue....',
