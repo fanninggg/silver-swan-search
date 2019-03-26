@@ -1,0 +1,51 @@
+.admin-user-dashboard {
+  display: flex;
+}
+.admin-user-filters {
+  width: 25vw;
+}
+
+.admin-dashboard-text {
+  font-size: 22px;
+  text-align: center;
+  padding-top: 25px;
+}
+
+.admin-form {
+  width: 22vw !important;
+  margin-left: 0 !important;
+}
+.admin-age-form {
+  width: 50px !important;
+  margin-left: 0 !important;
+  margin-bottom: 0 !important;
+  padding-left: 15px !important;
+  box-shadow: none !important;
+}
+
+.slider-flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#age-slider {
+  margin: 0 5px;
+  width: 15vw;
+}
+
+.noUi-connect {
+  background: #6B2022 !important;
+}
+
+.noUi-horizontal .noUi-handle {
+  border-radius: 50% !important;
+  height: 28px !important;
+  width: 28px !important;
+  &::before {
+    display: none;
+  }
+  &::after {
+    display: none;
+  }
+}

@@ -14,6 +14,8 @@
   <body>
     <%= render 'shared/flashes' %>
     <% if devise_controller? %>
+    <% elsif current_page?(controller: 'candidates', action: 'index') || current_page?(controller: 'job_applications', action: 'index') %>
+      <%= render 'shared/admin_navbar' %>
     <% else %>
       <%= render 'shared/navbar' %>
     <% end %>

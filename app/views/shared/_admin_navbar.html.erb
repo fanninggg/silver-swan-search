@@ -1,0 +1,11 @@
+<div class="admin-navbar">
+  <div class="admin-navbar-left">
+    <%= image_tag "Swan.png", class: "admin-navbar-swan" %>
+  </div>
+  <div class="admin-navbar-right">
+    <%= link_to "Users", admin_candidates_path, class: "admin-navbar-link grey medium-text"  %>
+    <%= link_to "Applications", admin_applications_path, class: "admin-navbar-link grey medium-text" %>
+    <!-- We neeed an admin jobs index as well -->
+    <%= link_to "Jobs", admin_candidates_path, class: "admin-navbar-link grey medium-text"  %>
+  </div>
+</div>
