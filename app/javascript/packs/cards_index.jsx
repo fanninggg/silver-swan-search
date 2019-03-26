@@ -107,7 +107,7 @@ class SwipeItem extends React.Component {
       } else if (deltaX > 300 && !this.state.triggered) {
         this.setState({ triggered: true })
         // Ben this is the trigger point for Liking a job
-        axios.post(`/jobs/${this.props.jobsProp.id}/applications`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
+        axios.post(`/jobs/${this.props.jobsProp.id}/likes`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
           .then(response => console.log(response.data.response))
           .catch(err => console.log(err.response.data.response))
       }
@@ -160,10 +160,16 @@ class SwipeItem extends React.Component {
 
   like() {
     console.log("I am liked :)")
+    axios.post(`/jobs/${this.props.jobsProp.id}/likes`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
+          .then(response => console.log(response.data.response))
+          .catch(err => console.log(err.response.data.response))
   }
 
   dislike() {
     console.log("I am disliked :(")
+    axios.post(`/jobs/${this.props.jobsProp.id}/rejections`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
+      .then(response => console.log(response.data.response))
+      .catch(err => console.log(err.response.data.response))
   }
 
   render() {
@@ -194,19 +200,20 @@ class SwipeItem extends React.Component {
               <a href={`/jobs/${this.props.jobIdProp}`} className="grey underline more-info-link">More Information</a>
             </div>
             <div className="tinder-buttons">
-              <a onClick={this.dislike}>
+              <a onClick={this.dislike.bind(this)}>
                 <div className="dislike-button"></div>
               </a>
               <a className="silver-swan-buttonlink" onClick={
                 () => {
                     axios.post(`/jobs/${this.props.jobsProp.id}/applications`, {},{ headers: { 'X-CSRF-Token': this.props.authenticityTokenProp } })
                       .then(response => console.log(response.data.response))
+                      .catch(err => console.log(err.response.data.response))
                   }
                 }
               >
                 <div className="silver-swan-button small-silver-swan-button">Apply Now</div>
               </a>
-              <a onClick={this.like}>
+              <a onClick={this.like.bind(this)}>
                 <div className="like-button"></div>
               </a>
             </div>

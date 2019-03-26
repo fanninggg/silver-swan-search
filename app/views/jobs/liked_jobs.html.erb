@@ -1,0 +1,7 @@
+<div>
+  <% @jobs.each do |job| %>
+    <h3><%= job.title %></h3>
+    <h5><%= job.company_name %></h5>
+    <p><%= job.description %></p>
+  <% end %>
+</div>

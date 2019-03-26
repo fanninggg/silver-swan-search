@@ -1,12 +1,13 @@
 class JobsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_after_action :verify_authorized, only: [:liked_jobs]
   skip_after_action :verify_policy_scoped, only: :index
 
   def index
     @jobs = Rails.cache.fetch("jobs", expires_in: 1.hour) do
       get_jobs.map { |job| Job.find_by(vincere_id: job["id"]) }
     end
-    @jobs = @jobs.delete_if { |job| job.applied_for?(current_user) || job.rejected?(current_user) } unless current_user.nil?
+    @jobs = @jobs.delete_if { |job| job.applied_for?(current_user) || job.rejected?(current_user) || job.liked?(current_user) } unless current_user.nil?
   end
 
   def show
@@ -18,5 +19,9 @@ class JobsController < ApplicationController
       raise StandardError, "No credentials" unless response.is_a?(Hash)
       response
     end
+  end
+
+  def liked_jobs
+    @jobs = Job.search_by_like(current_user.id)
   end
 end

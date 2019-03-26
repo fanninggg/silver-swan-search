@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_161036) do
+ActiveRecord::Schema.define(version: 2019_03_26_141518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,16 @@ ActiveRecord::Schema.define(version: 2019_03_25_161036) do
     t.datetime "updated_at", null: false
     t.string "salary"
     t.string "salary_type"
+    t.string "sector"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_likes_on_job_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -129,4 +139,6 @@ ActiveRecord::Schema.define(version: 2019_03_25_161036) do
   add_foreign_key "job_applications", "users"
   add_foreign_key "job_rejections", "jobs"
   add_foreign_key "job_rejections", "users"
+  add_foreign_key "likes", "jobs"
+  add_foreign_key "likes", "users"
 end
