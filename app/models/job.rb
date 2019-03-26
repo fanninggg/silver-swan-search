@@ -3,6 +3,8 @@ class Job < ApplicationRecord
 
   has_many :job_applications
   has_many :users, through: :job_applications
+  has_many :likes
+  has_many :liking_users, through: :likes, source: :user
 
   def set_salary(info)
     begin
@@ -21,6 +23,11 @@ class Job < ApplicationRecord
 
   def applied_for?(user)
     JobApplication.where(job: self, user: user).any?
+  end
+
+  def liked?(user)
+    Like.where(job: self, user: user).any?
+
   end
 
   def display_salary

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: :registrations }
+  devise_for :users, controllers: { registrations: :registrations } do
+  end
   root to: 'jobs#index'
   resources :jobs, only: [:index, :show] do
     resources :applications, only: :create, controller: :job_applications
     resources :rejections, only: :create, controller: :job_rejections
+    resources :likes, only: :create
   end
   resources :applications, only: [:show, :index], controller: :job_applications
   get '/authorise', to: 'pages#authorise'
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
   get '/privacy-policy', to: 'pages#privacy'
   get '/support', to: 'pages#support'
   post '/report', to: 'pages#report'
+  get '/likes', to: 'jobs#liked_jobs'
   namespace :admin do
     resources :candidates, only: [:index]
     resources :applications, only: [:index], controller: :job_applications

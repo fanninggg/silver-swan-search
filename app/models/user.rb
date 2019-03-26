@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :conversational_languages, dependent: :destroy
   has_many :job_applications
   has_many :jobs, through: :job_applications
+  has_many :likes
+  has_many :liked_jobs, through: :likes, source: :job
   has_one_attached :photo
   has_one_attached :cv
 
