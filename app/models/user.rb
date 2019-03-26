@@ -26,6 +26,9 @@ class User < ApplicationRecord
     conversational_languages: :language,
     fluent_languages: :language
   }
+  # pg_search_scope :search_by_application_sector, associated_against: {
+  #   jobs: :sector
+  # }
 
   def update_cv_file_name
     if cv.attached?
