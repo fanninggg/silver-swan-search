@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :candidates, only: [:index]
     resources :applications, only: [:index], controller: :job_applications
+    resources :jobs, only: [:index]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

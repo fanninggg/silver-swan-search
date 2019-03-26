@@ -26,4 +26,23 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :accepts_terms])
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :phone_number, :gender, :dob, :experience, :location, :nationality, :bio, :photo, :cv])
   end
+
+  def get_jobs
+    response = api_get("/job/search/fl=id,job_title,company,description,closed_date?q=closed_date:{NOW TO ALL]#&limit=100")
+    raise StandardError, "No credentials" unless response.is_a?(Hash)
+    jobs = response["result"]["items"]
+    jobs.each do |job|
+      if Job.find_by(vincere_id: job["id"]).nil?
+        @job = Job.create(
+          vincere_id: job["id"],
+          title: job["job_title"],
+          company_name: job["company"]["name"] ,
+          description: Nokogiri::HTML.parse(job["description"]).text,
+          closing_date: job["closed_date"]
+        )
+
+        @job.set_salary(api_get("/position/#{@job.vincere_id}")["compensation"])
+      end
+    end
+  end
 end
