@@ -28,12 +28,19 @@
                     label: false,
                     placeholder: "Confirm password",
                     input_html: { autocomplete: "new-password" } %>
-        <%= f.input :accepts_terms,
-                    label: 'I understand & accept the privacy policy' %>
+        <fieldset class="form-group boolean optional user_accepts_terms">
+          <div class="form-check switch">
+            <label class="form-check-label boolean optional terms-flex full-screen-width">
+              <input name="user[accepts_terms]" type="hidden" value="0">
+              <input class="form-check-input boolean optional" type="checkbox" value="1" name="user[accepts_terms]" id="user_accepts_terms">
+              <span class="slider round"></span>
+              <p class="grey tiny-text half-screen-width">I have read and understood the <a href="/privacy-policy" class="grey underline privacy-link">privacy policy</a></p>
+            </label>
+          </div>
+        </fieldset>
       </div>
-
       <div class="form-actions">
-        <%= f.button :submit, "Sign up" %>
+        <input type="submit" name="commit" value="Sign Up" class="btn silver-swan-button signup-ss-button" data-disable-with="Sign Up">
       </div>
     <% end %>
   </div>
