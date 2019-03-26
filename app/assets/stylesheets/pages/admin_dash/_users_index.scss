@@ -1,25 +1,48 @@
 .admin-user-dashboard {
   display: flex;
 }
-.admin-user-filters {
-  width: 25vw;
+
+.filter-title {
+  font-size: 20px;
+  font-weight: lighter;
+  font-family: "Open Sans";
 }
 
-.admin-dashboard-text {
-  font-size: 22px;
-  text-align: center;
-  padding-top: 25px;
+.admin-user-filters {
+  width: 25vw;
+  border-right: 1px solid #C4C4C4;
+  min-height: calc(100vh - 100px);
+  margin-left: 25px;
+  .form-control-label {
+    color: #8E8E8E;
+    font-size: 15px;
+    font-weight: lighter;
+  }
+}
+
+.admin-user-index {
+  width: 75vw;
+}
+
+.admin-user-cards-holder {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 50px;
 }
 
 .admin-form {
-  width: 22vw !important;
-  margin-left: 0 !important;
+  width: 20vw !important;
+  margin-left: 0px !important;
 }
+
 .admin-age-form {
-  width: 50px !important;
-  margin-left: 0 !important;
+  width: 30px !important;
+  margin-left: 0px !important;
   margin-bottom: 0 !important;
-  padding-left: 15px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
   box-shadow: none !important;
 }
 
@@ -31,7 +54,7 @@
 
 #age-slider {
   margin: 0 5px;
-  width: 15vw;
+  width: 13vw;
 }
 
 .noUi-connect {
@@ -48,4 +71,9 @@
   &::after {
     display: none;
   }
+}
+
+.admin-user-index-tabs {
+  display: flex;
+  justify-content: space-around;
 }
