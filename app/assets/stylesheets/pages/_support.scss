@@ -1,0 +1,27 @@
+.support-container {
+  margin: 0 5vw;
+}
+
+.support-logo-holder {
+  height: 25vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.support-logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.support-title {
+  font-size: 32px;
+}
+
+.social-links-flex {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}

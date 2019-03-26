@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/authorise', to: 'pages#authorise'
   get '/credentials', to: 'pages#credentials'
   get '/privacy-policy', to: 'pages#privacy'
+  get '/support', to: 'pages#support'
   namespace :admin do
     resources :candidates, only: [:index]
     resources :applications, only: [:index], controller: :job_applications
