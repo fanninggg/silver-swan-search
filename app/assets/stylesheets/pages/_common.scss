@@ -52,7 +52,16 @@ body {
   color: #fff;
 }
 
-// Margins
+// Spacing
+.margin-top {
+  margin-top: 20px;
+}
+.margin-bottom {
+  margin-bottom: 20px;
+}
+.large-margin-top {
+  margin-top: 40px;
+}
 .no-margin {
   margin: 0;
 }
@@ -67,11 +76,6 @@ body {
 }
 .no-left-margin {
   margin-left: 0;
-}
-
-// Spacing
-.margin-top {
-  margin-top: 20px;
 }
 
 

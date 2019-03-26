@@ -1,7 +1,7 @@
 require 'faker'
 
 User.destroy_all
-
+puts "Seeding"
 50.times do
   user = User.new(
     last_name: Faker::Name.last_name,
@@ -12,7 +12,8 @@ User.destroy_all
     nationality: Nationality::NATIONALITY.sample,
     experience: %w[1 2 3 4 5].sample,
     bio: Faker::Lorem.paragraph(3, true, 3),
-    password: 'password'
+    password: 'password',
+    accepts_terms: true
   )
   user.first_name = Faker::Name.send("#{user.gender.downcase}_first_name")
   user.email = Faker::Internet.safe_email(user.full_name)
@@ -20,5 +21,6 @@ User.destroy_all
   LanguageList::COMMON_LANGUAGES.map(&:name).map { |l| l.match(/Greek/) ? 'Greek' : l }.map { |l| l.match(/Tonga/) ? 'Tonga' : l}.sample(rand(1..3)).each { |l| FluentLanguage.create(language: l, user: user) }
   LanguageList::COMMON_LANGUAGES.map(&:name).map { |l| l.match(/Greek/) ? 'Greek' : l }.map { |l| l.match(/Tonga/) ? 'Tonga' : l}.sample(rand(1..3)).each { |l| ConversationalLanguage.create(language: l, user: user) }
 
-  User.create(email: 'admin@admin.com', password: 'password', admin: true)
+  User.create!(first_name: 'Admin', last_name: 'Nimda', email: 'admin@test.com', password: 'password', admin: true, accepts_terms: true)
 end
+puts "Finished Seeding"

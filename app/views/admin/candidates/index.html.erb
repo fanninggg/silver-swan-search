@@ -1,69 +1,76 @@
-<div class="admin-dashboard-navbar">
-  <h1 class="admin-dashboard-text">Admin Dashboard</h1>
+<div class="admin-user-dashboard">
+  <div class="admin-user-filters">
+    <%= simple_form_for :search, url: admin_candidates_path, method: :get do |f| %>
+      <%= f.input :gender, collection: %w[Male Female Other], selected: params[:search].present? ? params[:search][:gender] : '', include_blank: true, label: 'Gender', required: false, input_html: {class: "admin-form"} %>
+      <%= f.input :location, label: 'Current location', collection: User.where(admin: false).map(&:country_name).uniq.sort!, required: false, input_html: {class: "admin-form"} %>
+
+      <div class="slider-flex">
+        <div class="form-group string optional search_age_lower_limit no-margin">
+          <input class="form-control string optional admin-age-form" data-value="18" type="text" name="search[age_lower_limit]" id="search_age_lower_limit">
+        </div>
+        <div id="age-slider" ></div>
+        <div class="form-group string optional search_age_upper_limit no-margin">
+          <input class="form-control string optional admin-age-form" data-value="70" type="text" name="search[age_upper_limit]" id="search_age_upper_limit">
+        </div>
+      </div>
+
+      <%= f.input :languages, collection: (FluentLanguage.all + ConversationalLanguage.all).map(&:language).uniq.sort!, selected: params[:search].present? ? params[:search][:languages] : '', input_html: { class: "admin-form", multiple: true , required: false} %>
+      <%= f.input :experience, collection: ['Less than a year', '1-3', '3-5', '5+'], selected: params[:search].present? ? params[:search][:experience] : '', include_blank: true, required: false, input_html: {class: "admin-form"} %>
+      <%= f.submit 'Search' %>
+    <% end %>
+  </div>
+  <div class="admin-user-index">
+    <% @candidates.each do |candidate| %>
+      <div class="candidate-card-holder">
+        <div class="candidate-card">
+          <div class="candidate-card-image">
+
+          </div>
+          <div class="candidate-card-info">
+            <div class="candidate-name">
+              <p class="no-margin"><%= candidate.full_name %></p>
+            </div>
+            <div class="candiate-age grey-text">
+              <p class="no-margin"><%= candidate.age %></p>
+            </div>
+            <div class="candidate-gender grey-text">
+              <p class="no-margin"><%= candidate.gender %></p>
+            </div>
+            <div class="candidate-country">
+              <p class="no-margin">Profile 100% complete</p>
+            </div>
+          </div>
+          <div class="candidate-card-buttons">
+            <% if candidate.approved %>
+              <p><%= candidate.first_name %> has been uploaded to Vincere and shortlisted for a role</p>
+            <% else %>
+              <div class="admin-button maroon-background">
+                <a href="#" class="admin-button-text">Upload & Shortlist</a>
+              </div>
+              <% if candidate.cv.attached? %>
+                <div class="admin-button maroon-background">
+                  <a
+                    href="<%= url_for(candidate.cv) %>"
+                    class="admin-button-text"
+                    type="application/octet-stream"
+                    target = "_blank"
+                    download
+                  >
+                    Download CV
+                  </a>
+                </div>
+              <% else %>
+                <div class="admin-button grey-background">
+                  <a href="#" class="admin-button-text">No CV available</a>
+                </div>
+              <% end %>
+              <div class="admin-button grey-background">
+                <a href="#" class="admin-button-text">Not Suitable</a>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= simple_form_for :search, url: admin_candidates_path, method: :get do |f| %>
-  <%= f.input :gender, collection: %w[Male Female Other], selected: params[:search].present? ? params[:search][:gender] : '', include_blank: true, label: 'Gender', required: false %>
-  <%= f.input :location, label: 'Current location', collection: User.where(admin: false).map(&:country_name).uniq.sort!, required: false %>
-  <div style="display: flex; justify-content: space-around;">
-    <%= f.input :age_lower_limit, input_html: {'data-value': params[:search].present? ? params[:search][:age_lower_limit] : 18}, required: false %>
-    <%= f.input :age_upper_limit, input_html: {'data-value': params[:search].present? ? params[:search][:age_upper_limit] : 70}, required: false  %>
-  </div>
-  <%= f.input :languages, collection: (FluentLanguage.all + ConversationalLanguage.all).map(&:language).uniq.sort!, selected: params[:search].present? ? params[:search][:languages] : '', input_html: { multiple: true , required: false} %>
-  <div id="age-slider" style="margin: 0 30px 30px 30px;"></div>
-  <%= f.input :experience, collection: ['Less than a year', '1-3', '3-5', '5+'], selected: params[:search].present? ? params[:search][:experience] : '', include_blank: true, required: false %>
-  <%= f.submit 'Search' %>
-<% end %>
-
-<% @candidates.each do |candidate| %>
-  <div class="candidate-card-holder">
-    <div class="candidate-card">
-      <div class="candidate-card-image">
-
-      </div>
-      <div class="candidate-card-info">
-        <div class="candidate-name">
-          <p class="no-margin"><%= candidate.full_name %></p>
-        </div>
-        <div class="candiate-age grey-text">
-          <p class="no-margin"><%= candidate.age %></p>
-        </div>
-        <div class="candidate-gender grey-text">
-          <p class="no-margin"><%= candidate.gender %></p>
-        </div>
-        <div class="candidate-country">
-          <p class="no-margin">Profile 100% complete</p>
-        </div>
-      </div>
-      <div class="candidate-card-buttons">
-        <% if candidate.approved %>
-          <p><%= candidate.first_name %> has been uploaded to Vincere and shortlisted for a role</p>
-        <% else %>
-          <div class="admin-button maroon-background">
-            <a href="#" class="admin-button-text">Upload & Shortlist</a>
-          </div>
-          <% if candidate.cv.attached? %>
-            <div class="admin-button maroon-background">
-              <a
-                href="<%= url_for(candidate.cv) %>"
-                class="admin-button-text"
-                type="application/octet-stream"
-                target = "_blank"
-                download
-              >
-                Download CV
-              </a>
-            </div>
-          <% else %>
-            <div class="admin-button grey-background">
-              <a href="#" class="admin-button-text">No CV available</a>
-            </div>
-          <% end %>
-          <div class="admin-button grey-background">
-            <a href="#" class="admin-button-text">Not Suitable</a>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-<% end %>
